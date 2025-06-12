@@ -6,11 +6,6 @@
   <title>Xeraffé Productions</title>
   <style>
     body { font-family: sans-serif; margin: 0; padding: 0; }
-    header { background-color: black; color: white; display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 1rem; }
-    .logo { display: flex; align-items: center; gap: 0.5rem; }
-    .logo img { height: 30px; }
-
-    nav { display: flex; justify-content: center; border-top: 1px solid black; border-bottom: 1px solid black; }
     nav a, .dropdown { padding: 1rem; display: block; text-align: center; text-decoration: none; color: black; position: relative; }
     nav a:hover, .dropdown:hover { background-color: #eee; }
 
@@ -39,38 +34,62 @@
     .dropdown-content a:hover {
       background-color: #f0f0f0;
     }
+
+    header, nav {
+      width: 100%;
+    }
+
+    header {
+      background-color: black;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 1rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo img {
+      height: 30px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+    }
+
+    nav a {
+      padding: 1rem 2rem;
+      text-decoration: none;
+      color: black;
+      border-right: 1px solid black;
+      background: white;
+      font-weight: bold;
+    }
+
+    nav a:last-child {
+      border-right: none;
+    }
   </style>
 </head>
 <body>
 
-<header>
-  <div class="logo">
-    <img src="logo.png" alt="Logo">
-    <strong>Xeraffé Productions</strong>
-  </div>
-  <div>Hola, invitado</div>
-</header>
+  <div id="menu-placeholder"></div>
 
-<nav>
-  <div class="dropdown">
-    <a href="#">Dashboard ▾</a>
-    <div class="dropdown-content">
-      <a href="dashboard_usuario.html">Usuario</a>
-      <a href="dashboard_admin.html">Administrador</a>
-    </div>
-  </div>
-  <div class="dropdown">
-    <a href="#">Ideación ▾</a>
-    <div class="dropdown-content">
-      <a href="#">Ejemplo visual</a>
-      <a href="#">Ejemplo textual</a>
-    </div>
-  </div>
-  <a href="planificacion.html">Planificación</a>
-  <a href="nueva orden.html">Nueva orden</a>
-  <a href="mis ordenes.html">Mis órdenes</a>
-  <a href="mi perfil.html">Mi Perfil</a>
-</nav>
+  <script>
+    fetch("menu.html")
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("menu-placeholder").innerHTML = data;
+      });
+  </script>
 
 </body>
 </html>
