@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nueva orden - Xeraffé Productions</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: black;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 1rem;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .logo img {
+      height: 30px;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+    }
+    nav a,
+    .dropdown .dropbtn {
+      padding: 1rem 2rem;
+      text-decoration: none;
+      color: black;
+      border-right: 1px solid black;
+      background: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    nav a:last-child {
+      border-right: none;
+    }
+    .dropdown {
+      position: relative;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: white;
+      border: 1px solid black;
+      z-index: 1000;
+    }
+    .dropdown-content a {
+      display: block;
+      padding: 10px 20px;
+      border-bottom: 1px solid black;
+      text-decoration: none;
+      color: black;
+      white-space: nowrap;
+    }
+    .dropdown-content a:last-child {
+      border-bottom: none;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    main {
+      padding: 3rem 2rem;
+    }
+    section {
+      display: none;
+    }
+    section.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="logo.png" alt="Xeraffé Productions logo">
+      <strong>Xeraffé Productions</strong>
+    </div>
+    <div>Hola, invitado</div>
+  </header>
+  <nav>
+    <a href="index.html">Dashboard</a>
+    <a href="ideacion.html">Ideación</a>
+    <a href="planificacion.html">Planificación</a>
+    <div class="dropdown">
+      <button class="dropbtn">Nueva orden ▾</button>
+      <div class="dropdown-content">
+        <a href="#" onclick="showSection('cortas')">Grabaciones cortas</a>
+        <a href="#" onclick="showSection('largas')">Grabaciones largas</a>
+      </div>
+    </div>
+    <a href="mis ordenes.html">Mis órdenes</a>
+    <a href="mi perfil.html">Mi Perfil</a>
+  </nav>
+  <main>
+    <section id="cortas" class="active">
+      <h2>Grabaciones cortas</h2>
+      <p>Formulario u opciones para grabaciones cortas aquí.</p>
+    </section>
+    <section id="largas">
+      <h2>Grabaciones largas</h2>
+      <p>Formulario u opciones para grabaciones largas aquí.</p>
+    </section>
+  </main>
+  <script>
+    function showSection(id) {
+      document.querySelectorAll("main section").forEach(sec => sec.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+    }
+  </script>
+</body>
+</html>
