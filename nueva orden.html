@@ -6,17 +6,6 @@
   <title>Nueva orden - Xeraffé Productions</title>
   <style>
     body { font-family: sans-serif; margin: 0; padding: 0; }
-    header { background-color: black; color: white; display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 1rem; }
-    .logo { display: flex; align-items: center; gap: 0.5rem; }
-    .logo img { height: 30px; }
-    nav { display: flex; justify-content: center; border-top: 1px solid black; border-bottom: 1px solid black; }
-    nav a, .dropdown .dropbtn { padding: 1rem 2rem; text-decoration: none; color: black; border-right: 1px solid black; background: white; font-weight: bold; cursor: pointer; }
-    nav a:last-child { border-right: none; }
-    .dropdown { position: relative; }
-    .dropdown-content { display: none; position: absolute; top: 100%; left: 0; background-color: white; border: 1px solid black; z-index: 1000; }
-    .dropdown-content a { display: block; padding: 10px 20px; border-bottom: 1px solid black; text-decoration: none; color: black; white-space: nowrap; }
-    .dropdown-content a:last-child { border-bottom: none; }
-    .dropdown:hover .dropdown-content { display: block; }
     main { padding: 3rem 2rem; }
     section { display: none; }
     section.active { display: block; }
@@ -25,30 +14,51 @@
     .sub-section { display: none; margin-top: 1rem; border-top: 1px dashed black; padding-top: 1rem; }
     .sub-section.active { display: block; }
     .image-preview { margin-top: 1rem; max-width: 100%; }
+
+    header {
+      background-color: black;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 1rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo img {
+      height: 30px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+    }
+
+    nav a {
+      padding: 1rem 2rem;
+      text-decoration: none;
+      color: black;
+      border-right: 1px solid black;
+      background: white;
+      font-weight: bold;
+    }
+
+    nav a:last-child {
+      border-right: none;
+    }
   </style>
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <img src="logo.png" alt="Xeraffé Productions logo">
-      <strong>Xeraffé Productions</strong>
-    </div>
-    <div>Hola, invitado</div>
-  </header>
-  <nav>
-    <a href="index.html">Dashboard</a>
-    <a href="ideacion.html">Ideación</a>
-    <a href="planificacion.html">Planificación</a>
-    <div class="dropdown">
-      <button class="dropbtn">Nueva orden ▾</button>
-      <div class="dropdown-content">
-        <a href="#" onclick="showSection('cortas')">Grabaciones cortas</a>
-        <a href="#" onclick="showSection('largas')">Grabaciones largas</a>
-      </div>
-    </div>
-    <a href="mis ordenes.html">Mis órdenes</a>
-    <a href="mi perfil.html">Mi Perfil</a>
-  </nav>
+
+  <div id="menu-placeholder"></div>
+
   <main>
     <section id="cortas" class="active">
       <h2>Grabaciones cortas</h2>
@@ -62,117 +72,129 @@
         <button onclick="showSub('c7')">Ejemplo 5</button>
         <button onclick="showSub('c8')">Ejemplo 6</button>
       </div>
+
+      <!-- Subsecciones cortas -->
       <div id="c1" class="sub-section">
-  <label>Subir imagen:</label>
-  <input type="file" accept="image/*" onchange="previewImage(event, 'preview1')">
-  <img id="preview1" class="image-preview" />
-</div>
+        <label>Subir imagen:</label>
+        <input type="file" accept="image/*" onchange="previewImage(event, 'preview1')">
+        <img id="preview1" class="image-preview" />
+      </div>
       <div id="c2" class="sub-section">
-  <label>Subir imagen:</label>
-  <input type="file" accept="image/*" onchange="previewImage(event, 'preview2')">
-  <img id="preview2" class="image-preview" />
-</div>
+        <label>Subir imagen:</label>
+        <input type="file" accept="image/*" onchange="previewImage(event, 'preview2')">
+        <img id="preview2" class="image-preview" />
+      </div>
       <div id="c3" class="sub-section">
-  <h3>Ejemplo 1</h3>
-  <label>Subir imagen:</label>
-  <input type="file" accept="image/*" onchange="previewImage(event, 'preview3')">
-  <img id="preview3" class="image-preview" />
-</div>
+        <h3>Ejemplo 1</h3>
+        <label>Subir imagen:</label>
+        <input type="file" accept="image/*" onchange="previewImage(event, 'preview3')">
+        <img id="preview3" class="image-preview" />
+      </div>
       <div id="c4" class="sub-section">
-  <h3>Ejemplo 2</h3>
-  <label>Subir imagen:</label>
-  <input type="file" accept="image/*" onchange="previewImage(event, 'preview4')">
-  <img id="preview4" class="image-preview" />
-</div>
+        <h3>Ejemplo 2</h3>
+        <label>Subir imagen:</label>
+        <input type="file" accept="image/*" onchange="previewImage(event, 'preview4')">
+        <img id="preview4" class="image-preview" />
+      </div>
       <div id="c5" class="sub-section">
-  <h3>Ejemplo 3</h3>
-  <label>Subir imagen:</label>
-  <input type="file" accept="image/*" onchange="previewImage(event, 'preview5')">
-  <img id="preview5" class="image-preview" />
-</div>
+        <h3>Ejemplo 3</h3>
+        <label>Subir imagen:</label>
+        <input type="file" accept="image/*" onchange="previewImage(event, 'preview5')">
+        <img id="preview5" class="image-preview" />
+      </div>
       <div id="c6" class="sub-section">
-  <h3>Ejemplo 4</h3>
-  <label>Subir imagen:</label>
-  <input type="file" accept="image/*" onchange="previewImage(event, 'preview6')">
-  <img id="preview6" class="image-preview" />
-</div>
+        <h3>Ejemplo 4</h3>
+        <label>Subir imagen:</label>
+        <input type="file" accept="image/*" onchange="previewImage(event, 'preview6')">
+        <img id="preview6" class="image-preview" />
+      </div>
       <div id="c7" class="sub-section">
-  <h3>Ejemplo 5</h3>
-  <label>Subir imagen:</label>
-  <input type="file" accept="image/*" onchange="previewImage(event, 'preview7')">
-  <img id="preview7" class="image-preview" />
-</div>
+        <h3>Ejemplo 5</h3>
+        <label>Subir imagen:</label>
+        <input type="file" accept="image/*" onchange="previewImage(event, 'preview7')">
+        <img id="preview7" class="image-preview" />
+      </div>
       <div id="c8" class="sub-section">
-  <h3>Ejemplo 6</h3>
-  <label>Subir imagen:</label>
-  <input type="file" accept="image/*" onchange="previewImage(event, 'preview8')">
-  <img id="preview8" class="image-preview" />
-</div>
+        <h3>Ejemplo 6</h3>
+        <label>Subir imagen:</label>
+        <input type="file" accept="image/*" onchange="previewImage(event, 'preview8')">
+        <img id="preview8" class="image-preview" />
+      </div>
     </section>
+
     <section id="largas">
-  <h2>Grabaciones largas</h2>
-  <div class="sub-menu">
-    <button onclick="showSub('l1')">Ejemplo 1</button>
-    <button onclick="showSub('l2')">Ejemplo 2</button>
-    <button onclick="showSub('l3')">Ejemplo 3</button>
-  </div>
+      <h2>Grabaciones largas</h2>
+      <div class="sub-menu">
+        <button onclick="showSub('l1')">Ejemplo 1</button>
+        <button onclick="showSub('l2')">Ejemplo 2</button>
+        <button onclick="showSub('l3')">Ejemplo 3</button>
+      </div>
 
-  <div id="l1" class="sub-section">
-    <h3>Ejemplo 1</h3>
-    <label>Subir imagen:</label>
-    <input type="file" accept="image/*" onchange="previewImage(event, 'previewL1')">
-    <img id="previewL1" class="image-preview" />
-  </div>
+      <div id="l1" class="sub-section">
+        <h3>Ejemplo 1</h3>
+        <label>Subir imagen:</label>
+        <input type="file" accept="image/*" onchange="previewImage(event, 'previewL1')">
+        <img id="previewL1" class="image-preview" />
+      </div>
 
-  <div id="l2" class="sub-section">
-    <h3>Ejemplo 2</h3>
-    <label>Subir imagen:</label>
-    <input type="file" accept="image/*" onchange="previewImage(event, 'previewL2')">
-    <img id="previewL2" class="image-preview" />
-  </div>
+      <div id="l2" class="sub-section">
+        <h3>Ejemplo 2</h3>
+        <label>Subir imagen:</label>
+        <input type="file" accept="image/*" onchange="previewImage(event, 'previewL2')">
+        <img id="previewL2" class="image-preview" />
+      </div>
 
-  <div id="l3" class="sub-section">
-    <h3>Ejemplo 3</h3>
-    <label>Subir imagen:</label>
-    <input type="file" accept="image/*" onchange="previewImage(event, 'previewL3')">
-    <img id="previewL3" class="image-preview" />
-  </div>
-</section>
+      <div id="l3" class="sub-section">
+        <h3>Ejemplo 3</h3>
+        <label>Subir imagen:</label>
+        <input type="file" accept="image/*" onchange="previewImage(event, 'previewL3')">
+        <img id="previewL3" class="image-preview" />
+      </div>
+    </section>
   </main>
+
   <script>
-  function showSection(id) {
-    document.querySelectorAll("main > section").forEach(sec => sec.classList.remove("active"));
-    document.getElementById(id).classList.add("active");
-  }
+    // Cargar menú externo
+    fetch("menu.html")
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("menu-placeholder").innerHTML = data;
+      });
 
-  function showSub(id) {
-    document.querySelectorAll(".sub-section").forEach(div => div.classList.remove("active"));
-    document.getElementById(id).classList.add("active");
-  }
+    function showSection(id) {
+      document.querySelectorAll("main > section").forEach(sec => sec.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+    }
 
-  function previewImage(event, previewId) {
-    const reader = new FileReader();
-    reader.onload = function () {
-      const dataUrl = reader.result;
-      document.getElementById(previewId).src = dataUrl;
-      // Guardar en localStorage
-      localStorage.setItem(previewId, dataUrl);
-    };
-    reader.readAsDataURL(event.target.files[0]);
-  }
+    function showSub(id) {
+      document.querySelectorAll(".sub-section").forEach(div => div.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+    }
 
-  // Al cargar la página, recupera todas las imágenes guardadas
-  window.addEventListener('DOMContentLoaded', () => {
-    const ids = [
-      'preview1', 'preview2', 'preview3', 'preview4',
-      'preview5', 'preview6', 'preview7', 'preview8',
-      'previewL1', 'previewL2', 'previewL3'
-    ];
-    ids.forEach(id => {
-      const saved = localStorage.getItem(id);
-      if (saved) {
-        document.getElementById(id).src = saved;
-      }
+    function previewImage(event, previewId) {
+      const reader = new FileReader();
+      reader.onload = function () {
+        const dataUrl = reader.result;
+        document.getElementById(previewId).src = dataUrl;
+        localStorage.setItem(previewId, dataUrl);
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const ids = [
+        'preview1', 'preview2', 'preview3', 'preview4',
+        'preview5', 'preview6', 'preview7', 'preview8',
+        'previewL1', 'previewL2', 'previewL3'
+      ];
+      ids.forEach(id => {
+        const saved = localStorage.getItem(id);
+        if (saved) {
+          document.getElementById(id).src = saved;
+        }
+      });
     });
-  });
-</script>
+  </script>
+
+</body>
+</html>
