@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Planificación - Xeraffé Productions</title>
   <style>
     body {
@@ -12,7 +12,11 @@
     }
 
     main {
-      padding: 3rem 2rem;
+      padding: 2rem;
+    }
+
+    h2 {
+      margin-bottom: 1rem;
     }
 
     table {
@@ -23,53 +27,19 @@
     }
 
     th, td {
-      border: 1px solid #000;
+      border: 1px solid black;
       padding: 10px;
       text-align: center;
     }
 
     th {
-      background-color: #000;
-      color: white;
-    }
-
-    header {
       background-color: black;
       color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.5rem 1rem;
     }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .logo img {
-      height: 30px;
-    }
-
-    nav {
-      display: flex;
-      justify-content: center;
-      border-top: 1px solid black;
-      border-bottom: 1px solid black;
-    }
-
-    nav a {
-      padding: 1rem 2rem;
-      text-decoration: none;
-      color: black;
-      border-right: 1px solid black;
-      background: white;
+    .today {
+      background-color: #f0f0f0;
       font-weight: bold;
-    }
-
-    nav a:last-child {
-      border-right: none;
     }
   </style>
 </head>
@@ -78,39 +48,47 @@
   <div id="menu-placeholder"></div>
 
   <main>
-    <h2>Planificación</h2>
+    <h2>Calendario de planificación</h2>
     <div id="calendar-container"></div>
   </main>
 
   <script>
-    // Cargar el menú dinámico
-    fetch("menu.html")
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById("menu-placeholder").innerHTML = data;
-      });
+    // Cargar menú
+    document.addEventListener("DOMContentLoaded", function () {
+      fetch("menu.html")
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById("menu-placeholder").innerHTML = html;
+        });
 
-    // Generar calendario
-    const container = document.getElementById("calendar-container");
+      // Generar calendario
+      const container = document.getElementById("calendar-container");
+      const today = new Date();
+      const month = today.getMonth();
+      const year = today.getFullYear();
+      const firstDay = new Date(year, month, 1).getDay();
+      const lastDate = new Date(year, month + 1, 0).getDate();
+      const days = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
 
-    const today = new Date();
-    const month = today.getMonth();
-    const year = today.getFullYear();
+      let html = `<table><tr><th colspan="7">${today.toLocaleString('default', { month: 'long' }).toUpperCase()} ${year}</th></tr><tr>`;
+      days.forEach(day => html += `<th>${day}</th>`);
+      html += `</tr><tr>`;
 
-    const days = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
-    const firstDay = new Date(year, month, 1).getDay();
-    const lastDate = new Date(year, month + 1, 0).getDate();
+      for (let i = 0; i < firstDay; i++) {
+        html += `<td></td>`;
+      }
 
-    let html = `<table><tr><th colspan="7">${today.toLocaleString('default', { month: 'long' }).toUpperCase()} ${year}</th></tr><tr>`;
-    days.forEach(day => html += `<th>${day}</th>`);
-    html += `</tr><tr>`;
+      for (let day = 1; day <= lastDate; day++) {
+        const isToday = day === today.getDate();
+        html += `<td class="${isToday ? 'today' : ''}">${day}</td>`;
+        if ((firstDay + day) % 7 === 0) html += `</tr><tr>`;
+      }
 
-    for (let i = 0; i < firstDay; i++) html += `<td></td>`;
+      html += `</tr></table>`;
+      container.innerHTML = html;
+    });
+  </script>
 
-    for (let day = 1; day <= lastDate; day++) {
-      html += `<td>${day}</td>`;
-      if ((firstDay + day) % 7 === 0) html += `</tr><tr>`;
-    }
-    html += `</tr></table>`;
+</body>
+</html>
 
-    container.innerHTML = html
