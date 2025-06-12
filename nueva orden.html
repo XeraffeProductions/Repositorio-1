@@ -140,21 +140,39 @@
 </section>
   </main>
   <script>
-    function showSection(id) {
-      document.querySelectorAll("main > section").forEach(sec => sec.classList.remove("active"));
-      document.getElementById(id).classList.add("active");
-    }
-    function showSub(id) {
-      document.querySelectorAll(".sub-section").forEach(div => div.classList.remove("active"));
-      document.getElementById(id).classList.add("active");
-    }
-    function previewImage(event, previewId) {
-  const reader = new FileReader();
-  reader.onload = function () {
-    document.getElementById(previewId).src = reader.result;
-  };
-  reader.readAsDataURL(event.target.files[0]);
-}
-  </script>
-</body>
-</html>
+  function showSection(id) {
+    document.querySelectorAll("main > section").forEach(sec => sec.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+  }
+
+  function showSub(id) {
+    document.querySelectorAll(".sub-section").forEach(div => div.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+  }
+
+  function previewImage(event, previewId) {
+    const reader = new FileReader();
+    reader.onload = function () {
+      const dataUrl = reader.result;
+      document.getElementById(previewId).src = dataUrl;
+      // Guardar en localStorage
+      localStorage.setItem(previewId, dataUrl);
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  }
+
+  // Al cargar la página, recupera todas las imágenes guardadas
+  window.addEventListener('DOMContentLoaded', () => {
+    const ids = [
+      'preview1', 'preview2', 'preview3', 'preview4',
+      'preview5', 'preview6', 'preview7', 'preview8',
+      'previewL1', 'previewL2', 'previewL3'
+    ];
+    ids.forEach(id => {
+      const saved = localStorage.getItem(id);
+      if (saved) {
+        document.getElementById(id).src = saved;
+      }
+    });
+  });
+</script>
