@@ -38,9 +38,33 @@
     }
 
     .today {
-      background-color: #f0f0f0;
-      font-weight: bold;
-    }
+  background-color: rgba(255, 255, 100, 0.3); /* amarillo transparentoso */
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 0, 0.3),
+    rgba(255, 255, 0, 0.3) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  font-weight: bold;
+  border: 2px dashed #ccc;
+}
+
+#plan-tools button {
+  padding: 0.5rem 1rem;
+  border: 1px solid black;
+  background: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#plan-tools label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: bold;
+}
+
   </style>
 </head>
 <body>
@@ -49,6 +73,22 @@
 
   <main>
     <h2>Calendario de planificación</h2>
+    <div id="plan-tools">
+  <h3>Herramientas de planificación</h3>
+  <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+    <button>➕ Agregar evento</button>
+    <button>⭐ Agregar hito importante</button>
+    <button>🔔 Programar notificación</button>
+    <label>
+      <input type="checkbox" checked /> Notificar 15 min antes
+    </label>
+    <label>
+      <input type="checkbox" /> Notificar 1 hora antes
+    </label>
+    <button>🔁 Sincronizar Google Calendar</button>
+    <button>🔁 Sincronizar Calendly</button>
+  </div>
+</div>
     <div id="calendar-container"></div>
   </main>
 
