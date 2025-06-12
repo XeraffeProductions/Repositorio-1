@@ -3,80 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Xeraffé Productions</title>
+  <title>Nueva orden</title>
   <style>
-    body { margin: 0; font-family: Arial, sans-serif; }
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
     header {
       background-color: black;
       color: white;
-      padding: 10px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-    }
-    .logo img {
-      height: 40px;
-      margin-right: 10px;
+      padding: 0.5rem 1rem;
     }
     nav {
       display: flex;
       justify-content: center;
-      background-color: white;
       border-top: 1px solid black;
       border-bottom: 1px solid black;
     }
     nav a {
-      padding: 15px 40px;
+      padding: 1rem 2rem;
       text-decoration: none;
       color: black;
       border-right: 1px solid black;
-      text-align: center;
     }
     nav a:last-child {
       border-right: none;
     }
     main {
-      padding: 40px;
+      padding: 3rem 2rem;
+      min-height: 60vh;
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="logo">
-      <img src="logo.png">
-      <span>Xeraffé Productions</span>
-    </div>
-    <div>
-      Hola, invitado
-    </div>
+    <div><strong>Xeraffé Productions</strong></div>
+    <div>Hola, invitado</div>
   </header>
   <nav>
-    <a href="#" onclick="loadPage('dashboard.html')">Dashboard</a>
-    <a href="#" onclick="loadPage('ideacion.html')">Ideación</a>
-    <a href="#" onclick="loadPage('planificacion.html')">Planificación</a>
-    <a href="#" onclick="loadPage('nueva orden.html')">Nueva orden</a>
-    <a href="#" onclick="loadPage('mis ordenes.html')">Mis órdenes</a>
-    <a href="#" onclick="loadPage('mi perfil.html')">Mi Perfil</a>
+    <a href="#">Dashboard</a>
+    <a href="#">Ideación</a>
+    <a href="#">Planificación</a>
+    <a href="#">Nueva orden</a>
+    <a href="#">Mis órdenes</a>
+    <a href="#">Mi Perfil</a>
   </nav>
-  <main id="contenido">
-    <h1>Bienvenido a Xeraffé Productions</h1>
-    <p>
+  <main>
+    <!-- Página en blanco -->
   </main>
-  <script>
-    function loadPage(file) {
-      fetch(file)
-        .then(response => response.text())
-        .then(html => {
-          document.getElementById('contenido').innerHTML = html;
-        })
-        .catch(error => {
-          document.getElementById('contenido').innerHTML = '<p>Error al cargar el contenido.</p>';
-        });
-    }
-  </script>
 </body>
 </html>
