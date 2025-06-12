@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xeraffé Productions</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; }
+    header {
+      background-color: black;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo img {
+      height: 40px;
+      margin-right: 10px;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: white;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+    }
+    nav a {
+      padding: 15px 40px;
+      text-decoration: none;
+      color: black;
+      border-right: 1px solid black;
+      text-align: center;
+    }
+    nav a:last-child {
+      border-right: none;
+    }
+    main {
+      padding: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="logo.png" alt="Xeraffé Productions">
+      <span>Xeraffé Productions</span>
+    </div>
+    <div>
+      Hola, invitado 000036482
+    </div>
+  </header>
+  <nav>
+    <a href="#" onclick="loadPage('dashboard.html')">Dashboard</a>
+    <a href="#" onclick="loadPage('ideacion.html')">Ideación</a>
+    <a href="#" onclick="loadPage('planificacion.html')">Planificación</a>
+    <a href="#" onclick="loadPage('nueva.html')">Nueva</a>
+    <a href="#" onclick="loadPage('mis.html')">Mis</a>
+    <a href="#" onclick="loadPage('perfil.html')">Mi Perfil</a>
+  </nav>
+  <main id="contenido">
+    <h1>Bienvenido a Xeraffé Productions</h1>
+    <p>Selecciona una sección desde el menú para comenzar.</p>
+  </main>
+  <script>
+    function loadPage(file) {
+      fetch(file)
+        .then(response => response.text())
+        .then(html => {
+          document.getElementById('contenido').innerHTML = html;
+        })
+        .catch(error => {
+          document.getElementById('contenido').innerHTML = '<p>Error al cargar el contenido.</p>';
+        });
+    }
+  </script>
+</body>
+</html>
