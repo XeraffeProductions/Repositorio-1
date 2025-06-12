@@ -19,18 +19,20 @@
       margin-bottom: 1rem;
     }
 
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      max-width: 600px;
-      margin-top: 1rem;
-    }
+  table {
+  border-collapse: collapse;
+  width: 100%; /* ahora ocupa todo el espacio disponible */
+  max-width: 1000px;
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  }
 
-    th, td {
-      border: 1px solid black;
-      padding: 10px;
-      text-align: center;
-    }
+  th, td {
+  border: 1px solid black;
+  padding: 20px;
+  text-align: center;
+  }
+
 
     th {
       background-color: black;
@@ -91,16 +93,17 @@
   <aside id="plan-tools" style="flex: 0 0 250px;">
     <h3>Herramientas</h3>
     <div style="display: flex; flex-direction: column; gap: 1rem;">
-      <button>➕ Agregar evento</button>
-      <button>⭐ Agregar hito importante</button>
-      <div>
-        <label><input type="checkbox" checked /> Notificar 15 min antes</label><br />
-        <label><input type="checkbox" /> Notificar 1 hora antes</label>
-      </div>
-      <button>🔔 Programar notificación</button>
-      <button>🔁 Sincronizar Google Calendar</button>
-      <button>🔁 Sincronizar Calendly</button>
-    </div>
+  <button>➕ Agregar evento</button>
+  <button>⭐ Agregar hito importante</button>
+  <button>🔔 Programar notificación</button>
+  <div>
+    <label><input type="checkbox" checked /> Notificar 15 min antes</label><br />
+    <label><input type="checkbox" /> Notificar 1 hora antes</label>
+  </div>
+  <button>🔁 Sincronizar Google Calendar</button>
+  <button>🔁 Sincronizar Calendly</button>
+</div>
+
   </aside>
 
   <!-- Calendario -->
