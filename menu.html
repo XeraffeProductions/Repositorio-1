@@ -6,21 +6,32 @@
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem 1rem;
+    flex-wrap: wrap;
   }
 
   .logo {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    min-width: 0;
   }
 
   .logo img {
     height: 30px;
   }
 
+  .user-info {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    padding-left: 1rem;
+  }
+
   nav {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     border-top: 1px solid black;
     border-bottom: 1px solid black;
   }
@@ -44,14 +55,5 @@
     <img src="logo.png" alt="Xeraffé Productions logo">
     <strong>Xeraffé Productions</strong>
   </div>
-  <div>Hola, invitado</div>
+  <div class="user-info">Hola, invitado</div>
 </header>
-
-<nav>
-  <a href="dashboard.html">Dashboard</a>
-  <a href="ideacion.html">Ideación</a>
-  <a href="planificacion.html">Planificación</a>
-  <a href="nueva orden.html">Nueva orden</a>
-  <a href="mis ordenes.html">Mis órdenes</a>
-  <a href="mi perfil.html">Mi Perfil</a>
-</nav>
