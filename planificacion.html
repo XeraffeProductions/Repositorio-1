@@ -87,68 +87,101 @@
 
   <div id="menu-placeholder"></div>
 
-  <main>
     <main style="display: flex; gap: 2rem; padding: 2rem;">
   <!-- Herramientas -->
   <aside id="plan-tools" style="flex: 0 0 250px;">
     <h3>Herramientas</h3>
     <div style="display: flex; flex-direction: column; gap: 1rem;">
-  <button>➕ Agregar evento</button>
-  <button>⭐ Agregar hito importante</button>
-  <button>🔔 Programar notificación</button>
-  <div>
-    <label><input type="checkbox" checked /> Notificar 15 min antes</label><br />
-    <label><input type="checkbox" /> Notificar 1 hora antes</label>
-  </div>
-  <button>🔁 Sincronizar Google Calendar</button>
-  <button>🔁 Sincronizar Calendly</button>
-</div>
-
+      <button>➕ Agregar evento</button>
+      <button>⭐ Agregar hito importante</button>
+      <button>🔔 Programar notificación</button>
+      <div>
+        <label><input type="checkbox" checked /> Notificar 15 min antes</label><br />
+        <label><input type="checkbox" /> Notificar 1 hora antes</label>
+      </div>
+      <button>🔁 Sincronizar Google Calendar</button>
+      <button>🔁 Sincronizar Calendly</button>
+    </div>
   </aside>
 
   <!-- Calendario -->
   <section style="flex: 1;">
     <h2>Calendario de planificación</h2>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+  <button onclick="changeMonth(-1)">« Anterior</button>
+  <h3 id="month-title" style="margin: 0 auto; text-align: center;"></h3>
+  <button onclick="changeMonth(1)">Siguiente »</button>
+</div>
     <div id="calendar-container"></div>
+
+    <!-- Información del día -->
+    <div id="day-info" style="margin-top: 2rem; display: none;">
+      <h3>Información del <span id="selected-date"></span></h3>
+      <p><strong>Eventos:</strong> [pendiente]</p>
+      <p><strong>Hitos importantes:</strong> [pendiente]</p>
+      <p><strong>Ediciones pendientes hasta la fecha:</strong> [pendiente]</p>
+      <p><strong>Flujo mensual de publicaciones:</strong> [pendiente]</p>
+    </div>
   </section>
-  </main>
+</main>
+
 
   <script>
-    // Cargar menú
-    document.addEventListener("DOMContentLoaded", function () {
-      fetch("menu.html")
-        .then(res => res.text())
-        .then(html => {
-          document.getElementById("menu-placeholder").innerHTML = html;
-        });
+  let currentDate = new Date();
 
-      // Generar calendario
-      const container = document.getElementById("calendar-container");
-      const today = new Date();
-      const month = today.getMonth();
-      const year = today.getFullYear();
-      const firstDay = new Date(year, month, 1).getDay();
-      const lastDate = new Date(year, month + 1, 0).getDate();
-      const days = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
+  document.addEventListener("DOMContentLoaded", function () {
+    fetch("menu.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("menu-placeholder").innerHTML = html;
+      });
 
-      let html = `<table><tr><th colspan="7">${today.toLocaleString('default', { month: 'long' }).toUpperCase()} ${year}</th></tr><tr>`;
-      days.forEach(day => html += `<th>${day}</th>`);
-      html += `</tr><tr>`;
+    renderCalendar();
+  });
 
-      for (let i = 0; i < firstDay; i++) {
-        html += `<td></td>`;
-      }
+  function changeMonth(offset) {
+    currentDate.setMonth(currentDate.getMonth() + offset);
+    renderCalendar();
+    document.getElementById("day-info").style.display = "none";
+  }
 
-      for (let day = 1; day <= lastDate; day++) {
-        const isToday = day === today.getDate();
-        html += `<td class="${isToday ? 'today' : ''}">${day}</td>`;
-        if ((firstDay + day) % 7 === 0) html += `</tr><tr>`;
-      }
+  function renderCalendar() {
+    const container = document.getElementById("calendar-container");
+    const today = new Date();
+    const month = currentDate.getMonth();
+    const year = currentDate.getFullYear();
+    const firstDay = new Date(year, month, 1).getDay();
+    const lastDate = new Date(year, month + 1, 0).getDate();
+    const days = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
 
-      html += `</tr></table>`;
-      container.innerHTML = html;
-    });
-  </script>
+    document.getElementById("month-title").textContent =
+      `${currentDate.toLocaleString('default', { month: 'long' }).toUpperCase()} ${year}`;
+
+    let html = `<table><tr>`;
+    days.forEach(day => html += `<th>${day}</th>`);
+    html += `</tr><tr>`;
+
+    for (let i = 0; i < firstDay; i++) html += `<td></td>`;
+
+    for (let day = 1; day <= lastDate; day++) {
+      const isToday =
+        day === today.getDate() &&
+        month === today.getMonth() &&
+        year === today.getFullYear();
+      html += `<td class="${isToday ? 'today' : ''}" onclick="showDayInfo(${day}, ${month + 1}, ${year})">${day}</td>`;
+      if ((firstDay + day) % 7 === 0) html += `</tr><tr>`;
+    }
+
+    html += `</tr></table>`;
+    container.innerHTML = html;
+  }
+
+  function showDayInfo(day, month, year) {
+    const formatted = `${day.toString().padStart(2, '0')}/${month.toString().padStart(2, '0')}/${year}`;
+    document.getElementById("selected-date").textContent = formatted;
+    document.getElementById("day-info").style.display = "block";
+  }
+</script>
 
 </body>
 </html>
