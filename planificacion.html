@@ -65,6 +65,20 @@
   font-weight: bold;
 }
 
+#plan-tools button {
+  padding: 0.5rem 1rem;
+  border: 1px solid black;
+  background: white;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+
+#plan-tools label {
+  font-weight: bold;
+}
+
   </style>
 </head>
 <body>
@@ -72,24 +86,28 @@
   <div id="menu-placeholder"></div>
 
   <main>
+    <main style="display: flex; gap: 2rem; padding: 2rem;">
+  <!-- Herramientas -->
+  <aside id="plan-tools" style="flex: 0 0 250px;">
+    <h3>Herramientas</h3>
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <button>➕ Agregar evento</button>
+      <button>⭐ Agregar hito importante</button>
+      <div>
+        <label><input type="checkbox" checked /> Notificar 15 min antes</label><br />
+        <label><input type="checkbox" /> Notificar 1 hora antes</label>
+      </div>
+      <button>🔔 Programar notificación</button>
+      <button>🔁 Sincronizar Google Calendar</button>
+      <button>🔁 Sincronizar Calendly</button>
+    </div>
+  </aside>
+
+  <!-- Calendario -->
+  <section style="flex: 1;">
     <h2>Calendario de planificación</h2>
-    <div id="plan-tools">
-  <h3>Herramientas de planificación</h3>
-  <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
-    <button>➕ Agregar evento</button>
-    <button>⭐ Agregar hito importante</button>
-    <button>🔔 Programar notificación</button>
-    <label>
-      <input type="checkbox" checked /> Notificar 15 min antes
-    </label>
-    <label>
-      <input type="checkbox" /> Notificar 1 hora antes
-    </label>
-    <button>🔁 Sincronizar Google Calendar</button>
-    <button>🔁 Sincronizar Calendly</button>
-  </div>
-</div>
     <div id="calendar-container"></div>
+  </section>
   </main>
 
   <script>
