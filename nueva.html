@@ -1,0 +1,62 @@
+<h1>Crear nuevo proyecto</h1>
+<p>Desde aquí puedes iniciar la creación de una nueva producción, idea o propuesta.</p>
+
+<style>
+  .button-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+  .toggle-button {
+    border: 2px solid black;
+    padding: 10px 25px;
+    font-size: 18px;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    border-radius: 20px;
+    transition: all 0.3s;
+  }
+  .toggle-button.active {
+    background-color: black;
+    color: white;
+  }
+</style>
+
+<div class="button-grid">
+  <button class="toggle-button active" id="btn1" onclick="handleClick(1)">BOTÓN 1</button>
+  <button class="toggle-button" id="btn2" onclick="handleClick(2)">BOTÓN 2</button>
+  <button class="toggle-button active" id="btn3" onclick="handleClick(3)">BOTÓN 3</button>
+  <button class="toggle-button" id="btn4" onclick="handleClick(4)">BOTÓN 4</button>
+</div>
+
+<script>
+  function handleClick(id) {
+    const btn1 = document.getElementById('btn1');
+    const btn2 = document.getElementById('btn2');
+    const btn3 = document.getElementById('btn3');
+    const btn4 = document.getElementById('btn4');
+
+    if (!btn1 || !btn2 || !btn3 || !btn4) return;
+
+    if (id === 1) {
+      btn1.classList.add('active');
+      btn2.classList.remove('active');
+      btn3.classList.remove('active');
+      btn4.classList.remove('active');
+    } else if (id === 2) {
+      btn1.classList.remove('active');
+      btn2.classList.add('active');
+      btn3.classList.remove('active');
+      btn4.classList.remove('active');
+    } else if (id === 3) {
+      if (btn2.classList.contains('active')) return;
+      btn3.classList.toggle('active');
+    } else if (id === 4) {
+      if (btn2.classList.contains('active')) return;
+      btn4.classList.toggle('active');
+    }
+  }
+</script>
