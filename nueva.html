@@ -10,15 +10,15 @@
   }
   .toggle-button {
      border: 2px solid black;
-     padding: 7px 20px;      /* antes: 10px 25px */
-     font-size: 14px;         /* antes: 18px */
+     padding: 7px 20px;
+     font-size: 14px;
      cursor: pointer;
      background-color: white;
      color: black;
      font-weight: bold;
-     border-radius: 15px;    /* antes: 20px */
+     border-radius: 15px;
      transition: all 0.3s;
-}
+  }
 
   .toggle-button.active {
     background-color: black;
@@ -52,12 +52,19 @@
       btn2.classList.add('active');
       btn3.classList.remove('active');
       btn4.classList.remove('active');
+      window.location.href = 'grabaciones-largas.html';
     } else if (id === 3) {
       if (btn2.classList.contains('active')) return;
       btn3.classList.toggle('active');
+      if (btn1.classList.contains('active') && btn3.classList.contains('active')) {
+        window.location.href = 'grabaciones-cortas-basico.html';
+      }
     } else if (id === 4) {
       if (btn2.classList.contains('active')) return;
       btn4.classList.toggle('active');
+      if (btn1.classList.contains('active') && btn4.classList.contains('active')) {
+        window.location.href = 'grabaciones-cortas-avanzado.html';
+      }
     }
   }
 </script>
