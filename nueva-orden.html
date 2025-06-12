@@ -114,9 +114,28 @@
         });
 
       // Mostrar sección según ancla (#cortas o #largas)
-      const hash = window.location.hash.substring(1);
-      if (hash === "largas") showSection("largas");
-      else showSection("cortas");
+function handleHashChange() {
+  const hash = window.location.hash.substring(1);
+  if (hash === "largas") {
+    showSection("largas");
+  } else {
+    showSection("cortas");
+  }
+}
+
+// Ejecutar al cargar la página
+document.addEventListener("DOMContentLoaded", function () {
+  fetch("menu.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("menu-placeholder").innerHTML = html;
+    });
+
+  handleHashChange(); // Mostrar sección inicial
+});
+
+// Detectar cambios en el hash (cuando haces clic en el menú sin recargar)
+window.addEventListener("hashchange", handleHashChange);
     });
 
     function showSection(id) {
