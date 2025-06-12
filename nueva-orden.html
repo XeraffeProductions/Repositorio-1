@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nueva orden - Xeraffé Productions</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    main {
+      padding: 2rem;
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+    }
+
+    .sub-menu {
+      margin-bottom: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .sub-menu button {
+      padding: 0.5rem 1rem;
+      border: 1px solid black;
+      background-color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .sub-section {
+      display: none;
+      margin-top: 1rem;
+      border-top: 1px dashed black;
+      padding-top: 1rem;
+    }
+
+    .sub-section.active {
+      display: block;
+    }
+
+    .image-preview {
+      margin-top: 1rem;
+      max-width: 100%;
+    }
+
+    section {
+      display: none;
+    }
+
+    section.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="menu-placeholder"></div>
+
+  <main>
+    <!-- Grabaciones Cortas -->
+    <section id="cortas" class="active">
+      <h2>Grabaciones cortas</h2>
+      <div class="sub-menu">
+        <button onclick="showSub('c1')">Modo básico</button>
+        <button onclick="showSub('c2')">Modo avanzado</button>
+        <button onclick="showSub('c3')">Ejemplo 1</button>
+        <button onclick="showSub('c4')">Ejemplo 2</button>
+        <button onclick="showSub('c5')">Ejemplo 3</button>
+        <button onclick="showSub('c6')">Ejemplo 4</button>
+        <button onclick="showSub('c7')">Ejemplo 5</button>
+        <button onclick="showSub('c8')">Ejemplo 6</button>
+      </div>
+
+      <!-- Sub-secciones -->
+      <div id="c1" class="sub-section"><h3>Modo básico</h3><input type="file" onchange="previewImage(event, 'p1')"><img id="p1" class="image-preview" /></div>
+      <div id="c2" class="sub-section"><h3>Modo avanzado</h3><input type="file" onchange="previewImage(event, 'p2')"><img id="p2" class="image-preview" /></div>
+      <div id="c3" class="sub-section"><h3>Ejemplo 1</h3><input type="file" onchange="previewImage(event, 'p3')"><img id="p3" class="image-preview" /></div>
+      <div id="c4" class="sub-section"><h3>Ejemplo 2</h3><input type="file" onchange="previewImage(event, 'p4')"><img id="p4" class="image-preview" /></div>
+      <div id="c5" class="sub-section"><h3>Ejemplo 3</h3><input type="file" onchange="previewImage(event, 'p5')"><img id="p5" class="image-preview" /></div>
+      <div id="c6" class="sub-section"><h3>Ejemplo 4</h3><input type="file" onchange="previewImage(event, 'p6')"><img id="p6" class="image-preview" /></div>
+      <div id="c7" class="sub-section"><h3>Ejemplo 5</h3><input type="file" onchange="previewImage(event, 'p7')"><img id="p7" class="image-preview" /></div>
+      <div id="c8" class="sub-section"><h3>Ejemplo 6</h3><input type="file" onchange="previewImage(event, 'p8')"><img id="p8" class="image-preview" /></div>
+    </section>
+
+    <!-- Grabaciones Largas -->
+    <section id="largas">
+      <h2>Grabaciones largas</h2>
+      <div class="sub-menu">
+        <button onclick="showSub('l1')">Ejemplo 1</button>
+        <button onclick="showSub('l2')">Ejemplo 2</button>
+        <button onclick="showSub('l3')">Ejemplo 3</button>
+      </div>
+
+      <div id="l1" class="sub-section"><h3>Ejemplo 1</h3><input type="file" onchange="previewImage(event, 'l1p')"><img id="l1p" class="image-preview" /></div>
+      <div id="l2" class="sub-section"><h3>Ejemplo 2</h3><input type="file" onchange="previewImage(event, 'l2p')"><img id="l2p" class="image-preview" /></div>
+      <div id="l3" class="sub-section"><h3>Ejemplo 3</h3><input type="file" onchange="previewImage(event, 'l3p')"><img id="l3p" class="image-preview" /></div>
+    </section>
+  </main>
+
+  <script>
+    // Cargar menú
+    document.addEventListener("DOMContentLoaded", function () {
+      fetch("menu.html")
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById("menu-placeholder").innerHTML = html;
+        });
+
+      // Mostrar sección según ancla (#cortas o #largas)
+      const hash = window.location.hash.substring(1);
+      if (hash === "largas") showSection("largas");
+      else showSection("cortas");
+    });
+
+    function showSection(id) {
+      document.querySelectorAll("main > section").forEach(s => s.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+    }
+
+    function showSub(id) {
+      document.querySelectorAll(".sub-section").forEach(s => s.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+    }
+
+    function previewImage(event, previewId) {
+      const reader = new FileReader();
+      reader.onload = function () {
+        document.getElementById(previewId).src = reader.result;
+        localStorage.setItem(previewId, reader.result);
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+
+    // Recuperar imágenes guardadas
+    window.addEventListener('DOMContentLoaded', () => {
+      const ids = ['p1','p2','p3','p4','p5','p6','p7','p8','l1p','l2p','l3p'];
+      ids.forEach(id => {
+        const saved = localStorage.getItem(id);
+        if (saved) document.getElementById(id).src = saved;
+      });
+    });
+  </script>
+
+</body>
+</html>
