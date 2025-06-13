@@ -65,13 +65,17 @@
     <!-- Aquí puedes agregar formularios o detalles del usuario -->
   </main>
 
-  <script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
     fetch("menu.html")
       .then(response => response.text())
       .then(data => {
         document.getElementById("menu-placeholder").innerHTML = data;
-      });
-  </script>
+      })
+      .catch(error => console.error("No se pudo cargar el menú:", error));
+  });
+</script>
+
 
 </body>
 </html>
