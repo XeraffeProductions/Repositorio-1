@@ -53,8 +53,20 @@
     <!-- Panel izquierdo -->
     <section class="panel left">
       <h2>Parámetros</h2>
+
+      <!-- Nuevo parámetro: Escenario -->
       <div class="form-group">
-        <label for="filtro">Filtrar:</label>
+        <label for="escenario">Escenario:</label>
+        <select id="escenario">
+          <option value="pesimista">Pesimista</option>
+          <option value="medio" selected>Medio</option>
+          <option value="optimista">Optimista</option>
+        </select>
+      </div>
+
+      <!-- Rango temporal -->
+      <div class="form-group">
+        <label for="filtro">Filtrar (años proyectados 2026 - 2036):</label>
         <select id="filtro">
           <option>Últimos 5 años</option>
           <option>Últimos 3 años</option>
