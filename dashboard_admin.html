@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <!-- Chart.js CDN -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard Admin - Xeraffé</title>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
       font-family: sans-serif;
@@ -54,143 +53,138 @@
 
   <main>
     <!-- Panel izquierdo -->
-<section class="panel left">
-  <h2>Parámetros</h2>
+    <section class="panel left">
+      <h2>Parámetros</h2>
 
-  <!-- Escenario -->
-  <div class="form-group">
-    <label for="escenario">Escenario:</label>
-    <select id="escenario">
-      <option value="pesimista">Pesimista</option>
-      <option value="medio" selected>Medio</option>
-      <option value="optimista">Optimista</option>
-    </select>
-  </div>
+      <div class="form-group">
+        <label for="escenario">Escenario:</label>
+        <select id="escenario">
+          <option value="pesimista">Pesimista</option>
+          <option value="medio" selected>Medio</option>
+          <option value="optimista">Optimista</option>
+        </select>
+      </div>
 
-  <!-- Año de filtro -->
-  <div class="form-group">
-    <label for="filtro">Filtrar años:</label>
-    <select id="filtro">
-      <option>2026</option>
-      <option>2027</option>
-      <option>2028</option>
-      <option>2029</option>
-      <option>2030</option>
-      <option>2031</option>
-      <option>2032</option>
-      <option>2033</option>
-      <option>2034</option>
-      <option>2035</option>
-      <option>2036</option>
-    </select>
-  </div>
+      <div class="form-group">
+        <label for="filtro">Filtrar años:</label>
+        <select id="filtro">
+          <option>2026</option>
+          <option>2027</option>
+          <option>2028</option>
+          <option>2029</option>
+          <option>2030</option>
+          <option>2031</option>
+          <option>2032</option>
+          <option>2033</option>
+          <option>2034</option>
+          <option>2035</option>
+          <option>2036</option>
+        </select>
+      </div>
 
-  <div class="form-group">
-    <label for="visitantes">Visitantes nuevos:</label>
-    <input type="number" id="visitantes" min="0" value="0" />
-  </div>
+      <div class="form-group">
+        <label for="visitantes">Visitantes nuevos:</label>
+        <input type="number" id="visitantes" min="0" value="0" />
+      </div>
 
-  <div class="form-group">
-    <label for="registros">Registros nuevos:</label>
-    <input type="number" id="registros" min="0" value="0" />
-  </div>
+      <div class="form-group">
+        <label for="registros">Registros nuevos:</label>
+        <input type="number" id="registros" min="0" value="0" />
+      </div>
 
-  <div class="form-group">
-    <label for="suscripciones">Suscripciones nuevas:</label>
-    <input type="number" id="suscripciones" min="0" value="0" />
-  </div>
+      <div class="form-group">
+        <label for="suscripciones">Suscripciones nuevas:</label>
+        <input type="number" id="suscripciones" min="0" value="0" />
+      </div>
 
-  <div class="form-group">
-    <label for="ordenes">Órdenes de edición:</label>
-    <input type="number" id="ordenes" min="0" value="0" />
-  </div>
+      <div class="form-group">
+        <label for="ordenes">Órdenes de edición:</label>
+        <input type="number" id="ordenes" min="0" value="0" />
+      </div>
 
-  <div class="form-group">
-    <label for="precio">Precio medio (USD):</label>
-    <input type="number" id="precio" min="5.99" step="0.01" value="5.99" />
-  </div>
-</section>
+      <div class="form-group">
+        <label for="precio">Precio medio (USD):</label>
+        <input type="number" id="precio" min="5.99" step="0.01" value="5.99" />
+      </div>
+    </section>
 
-
-  
-<!-- Panel derecho para gráficos -->
-
-<section class="panel right">
-  <h2>Visualización</h2>
-  <canvas id="margenChart" width="600" height="300"></canvas>
-</section>
-
-
-
+    <!-- Panel derecho para gráficos -->
+    <section class="panel right">
+      <h2>Visualización</h2>
+      <canvas id="margenChart" width="600" height="300"></canvas>
+    </section>
   </main>
 
-
   <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Cargar menú
-    fetch("menu.html")
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById("menu-placeholder").innerHTML = data;
-      });
+    document.addEventListener("DOMContentLoaded", function () {
+      // Cargar menú
+      fetch("menu.html")
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById("menu-placeholder").innerHTML = data;
+        });
 
-    // Base de datos simulada (escenario medio)
-    const datosMargen = {
-      2026: 12000,
-      2027: 18500,
-      2028: 22000,
-      2029: 25000,
-      2030: 26500,
-      2031: 28000,
-      2032: 30500,
-      2033: 33000,
-      2034: 34500,
-      2035: 36000,
-      2036: 38500,
-    };
+      // Base de datos simulada (escenario medio)
+      const datosMargen = {
+        2026: 12000,
+        2027: 18500,
+        2028: 22000,
+        2029: 25000,
+        2030: 26500,
+        2031: 28000,
+        2032: 30500,
+        2033: 33000,
+        2034: 34500,
+        2035: 36000,
+        2036: 38500,
+      };
 
-    const ctx = document.getElementById('margenChart').getContext('2d');
+      const canvas = document.getElementById('margenChart');
+      const ctx = canvas.getContext('2d');
 
-    // Función para generar el gráfico
-    function actualizarGraficoHasta(añoMax) {
-      const años = Object.keys(datosMargen).map(Number).filter(a => a <= añoMax);
-      const valores = años.map(año => datosMargen[año]);
+      function actualizarGraficoHasta(añoMax) {
+        const años = Object.keys(datosMargen).map(Number).filter(a => a <= añoMax);
+        const valores = años.map(año => datosMargen[año]);
 
-      if (window.margenChart) window.margenChart.destroy();
+        if (window.margenChart) {
+          window.margenChart.destroy();
+        }
 
-      window.margenChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: años,
-          datasets: [{
-            label: 'Margen Bruto ($)',
-            data: valores,
-            borderWidth: 2,
-            fill: true,
-          }]
-        },
-        options: {
-          responsive: true,
-          scales: {
-            y: {
-              beginAtZero: false
+        window.margenChart = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: años,
+            datasets: [{
+              label: 'Margen Bruto ($)',
+              data: valores,
+              borderWidth: 2,
+              borderColor: '#4A90E2',
+              backgroundColor: 'rgba(74, 144, 226, 0.2)',
+              fill: true,
+              tension: 0.3
+            }]
+          },
+          options: {
+            responsive: true,
+            scales: {
+              y: {
+                beginAtZero: false
+              }
             }
           }
-        }
+        });
+      }
+
+      // Inicializar en el año seleccionado
+      const filtro = document.getElementById("filtro");
+      actualizarGraficoHasta(parseInt(filtro.value));
+
+      // Actualizar al cambiar el filtro
+      filtro.addEventListener("change", function () {
+        actualizarGraficoHasta(parseInt(this.value));
       });
-    }
-
-    // Lógica: escuchar cambio de año
-    document.getElementById("filtro").addEventListener("change", function () {
-      const añoSeleccionado = parseInt(this.value);
-      actualizarGraficoHasta(añoSeleccionado);
     });
-
-    // Inicializar en el primer año seleccionado (2026 por defecto)
-    actualizarGraficoHasta(parseInt(document.getElementById("filtro").value));
-  });
-</script>
-
+  </script>
 
 </body>
 </html>
