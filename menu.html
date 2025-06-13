@@ -6,14 +6,14 @@
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem 1rem;
+    box-sizing: border-box;
   }
 
   .logo {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    text-decoration: none;
-    color: white;
+    flex-shrink: 0;
   }
 
   .logo img {
@@ -30,13 +30,16 @@
 
   nav a,
   .dropdown .dropbtn {
+    display: flex;
+    align-items: center;
     padding: 1rem 2rem;
     text-decoration: none;
     color: black;
-    font-weight: bold;
     border-right: 1px solid black;
-    background: white;
+    font-weight: bold;
+    background-color: white;
     cursor: pointer;
+    height: 100%;
   }
 
   nav a:last-child {
@@ -72,6 +75,11 @@
 
   .dropdown:hover .dropdown-content {
     display: block;
+  }
+
+  header > div:last-child {
+    white-space: nowrap;
+    margin-left: auto;
   }
 </style>
 
