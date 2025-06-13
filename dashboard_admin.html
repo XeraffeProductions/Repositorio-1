@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard Admin - Xeraffé</title>
@@ -137,9 +140,10 @@
 
     <!-- Panel derecho para gráficos -->
     <section class="panel right">
-      <h2>Visualización</h2>
-      <!-- Aquí irán los gráficos -->
-    </section>
+  <h2>Visualización</h2>
+  <canvas id="margenChart" width="400" height="200"></canvas>
+</section>
+
   </main>
 
   <script>
@@ -152,6 +156,73 @@
         .catch(error => console.error("No se pudo cargar el menú:", error));
     });
   </script>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Cargar menú
+    fetch("menu.html")
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("menu-placeholder").innerHTML = data;
+      });
+
+    // Base de datos simulada (escenario medio)
+    const datosMargen = {
+      2026: 12000,
+      2027: 18500,
+      2028: 22000,
+      2029: 25000,
+      2030: 26500,
+      2031: 28000,
+      2032: 30500,
+      2033: 33000,
+      2034: 34500,
+      2035: 36000,
+      2036: 38500,
+    };
+
+    const ctx = document.getElementById('margenChart').getContext('2d');
+
+    // Función para generar el gráfico
+    function actualizarGraficoHasta(añoMax) {
+      const años = Object.keys(datosMargen).map(Number).filter(a => a <= añoMax);
+      const valores = años.map(año => datosMargen[año]);
+
+      if (window.margenChart) window.margenChart.destroy();
+
+      window.margenChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: años,
+          datasets: [{
+            label: 'Margen Bruto ($)',
+            data: valores,
+            borderWidth: 2,
+            fill: true,
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: false
+            }
+          }
+        }
+      });
+    }
+
+    // Lógica: escuchar cambio de año
+    document.getElementById("filtro").addEventListener("change", function () {
+      const añoSeleccionado = parseInt(this.value);
+      actualizarGraficoHasta(añoSeleccionado);
+    });
+
+    // Inicializar en el primer año seleccionado (2026 por defecto)
+    actualizarGraficoHasta(parseInt(document.getElementById("filtro").value));
+  });
+</script>
+
 
 </body>
 </html>
