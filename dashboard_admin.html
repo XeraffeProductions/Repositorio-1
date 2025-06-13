@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard Admin - Xeraffé</title>
   <style>
     body {
@@ -12,7 +12,36 @@
     }
 
     main {
+      display: flex;
+      height: 100vh;
+    }
+
+    .panel {
+      flex: 1;
       padding: 2rem;
+      box-sizing: border-box;
+    }
+
+    .left {
+      border-right: 1px solid #ccc;
+      background-color: #f7f7f7;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 1rem;
+      box-sizing: border-box;
     }
   </style>
 </head>
@@ -21,8 +50,66 @@
   <div id="menu-placeholder"></div>
 
   <main>
-    <h1>Panel de Administración</h1>
-    <p>Desde aquí puedes gestionar órdenes, usuarios y configuraciones generales del sistema.</p>
+    <!-- Panel izquierdo -->
+    <section class="panel left">
+      <h2>Parámetros</h2>
+      <div class="form-group">
+        <label for="filtro">Filtrar:</label>
+        <select id="filtro">
+          <option>Últimos 5 años</option>
+          <option>Últimos 3 años</option>
+          <option>Último 1 año</option>
+          <option>Últimos 6 meses</option>
+          <option>Últimos 3 meses</option>
+          <option>Último 1 mes</option>
+          <option>Últimos 15 días</option>
+          <option>Últimos 7 días</option>
+          <option>Últimos 3 días</option>
+          <option>Último 1 día</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="visitantes">Visitantes nuevos:</label>
+        <input type="number" id="visitantes" min="0" value="0" />
+      </div>
+
+      <div class="form-group">
+        <label for="registros">Registros nuevos:</label>
+        <input type="number" id="registros" min="0" value="0" />
+      </div>
+
+      <div class="form-group">
+        <label for="suscripciones">Suscripciones nuevas:</label>
+        <input type="number" id="suscripciones" min="0" value="0" />
+      </div>
+
+      <div class="form-group">
+        <label for="ordenes">Órdenes de edición:</label>
+        <input type="number" id="ordenes" min="0" value="0" />
+      </div>
+
+      <div class="form-group">
+        <label for="precio">Precio medio (USD):</label>
+        <input type="number" id="precio" min="5.99" step="0.01" value="5.99" />
+      </div>
+
+      <div class="form-group">
+        <label for="editores">Cantidad de editores:</label>
+        <input type="number" id="editores" min="1" value="1" />
+      </div>
+
+      <div class="form-group">
+        <label for="garantia">Garantía:</label>
+        <input type="text" id="garantia" placeholder="Especificar o dejar vacío" />
+      </div>
+    </section>
+
+    <!-- Panel derecho para gráficos -->
+    <section class="panel right">
+      <h2>Visualización</h2>
+      <!-- Aquí irán los gráficos -->
+    </section>
   </main>
 
   <script>
