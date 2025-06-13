@@ -3,52 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard Administrador - Xeraffé</title>
+  <title>Dashboard Admin - Xeraffé</title>
   <style>
-    body { font-family: sans-serif; margin: 0; padding: 0; }
-    main { padding: 2rem; }
-
-    header, nav {
-      width: 100%;
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
     }
 
-    header {
-      background-color: black;
-      color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.5rem 1rem;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .logo img {
-      height: 30px;
-    }
-
-    nav {
-      display: flex;
-      justify-content: center;
-      border-top: 1px solid black;
-      border-bottom: 1px solid black;
-    }
-
-    nav a {
-      padding: 1rem 2rem;
-      text-decoration: none;
-      color: black;
-      border-right: 1px solid black;
-      background: white;
-      font-weight: bold;
-    }
-
-    nav a:last-child {
-      border-right: none;
+    main {
+      padding: 2rem;
     }
   </style>
 </head>
@@ -61,15 +25,16 @@
     <p>Desde aquí puedes gestionar órdenes, usuarios y configuraciones generales del sistema.</p>
   </main>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    fetch("menu.html")
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById("menu-placeholder").innerHTML = data;
-      })
-      .catch(error => console.error("No se pudo cargar el menú:", error));
-  });
-</script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      fetch("menu.html")
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById("menu-placeholder").innerHTML = data;
+        })
+        .catch(error => console.error("No se pudo cargar el menú:", error));
+    });
+  </script>
+
 </body>
 </html>
