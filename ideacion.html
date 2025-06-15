@@ -5,16 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ideación - Xeraffé</title>
   <style>
-    body {
-      font-family: sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-
-    main {
-      display: flex;
-      height: 100vh;
-    }
+    body { font-family: sans-serif; margin: 0; padding: 0; }
+    main { display: flex; height: 100vh; }
 
     .panel {
       box-sizing: border-box;
@@ -56,156 +48,150 @@
       margin-bottom: 0.5rem;
     }
 
-    .chat-log {
-      flex: 1;
-      border: 1px solid #ccc;
-      padding: 1rem;
-      background: white;
-      overflow-y: auto;
+    .idea-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
       margin-bottom: 1rem;
     }
 
-    .chat-log p {
-      margin-bottom: 0.8rem;
+    .idea-tab {
+      background-color: #eee;
+      padding: 0.3rem 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
     }
 
-    .chat-input {
+    .idea-tab button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .idea-chat-input {
       display: flex;
       gap: 0.5rem;
     }
 
-    .chat-input textarea {
+    .idea-chat-input textarea {
       flex: 1;
       padding: 0.5rem;
       resize: none;
+      font-style: italic;
     }
 
-    .chat-input button {
+    .idea-chat-input button {
       padding: 0.5rem 1rem;
       font-weight: bold;
       cursor: pointer;
+    }
+
+    .tools-right button {
+      width: 100%;
+      margin-bottom: 0.75rem;
+      padding: 0.6rem;
+      border: 1px solid #333;
+      background: white;
+      cursor: pointer;
+      text-align: left;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
 
-  <div id="menu-placeholder"></div>
+<div id="menu-placeholder"></div>
 
-  <main>
-    <!-- Panel izquierdo -->
-    <aside class="panel left">
-      <h3>Herramientas</h3>
-      <div class="form-group">
-        <button>Nueva idea</button>
-        <button onclick="toggleSub('p1')">Proyecto 1</button>
-        <div id="p1" class="project-sub">
-          <button class="form-group">Chat</button>
-          <button class="form-group">Guiones</button>
-          <button class="form-group">Recomendaciones mágicas</button>
-        </div>
-        <button onclick="toggleSub('p2')">Proyecto 2</button>
-        <div id="p2" class="project-sub">
-          <button class="form-group">Chat</button>
-          <button class="form-group">Guiones</button>
-          <button class="form-group">Recomendaciones mágicas</button>
-        </div>
-        <button onclick="toggleSub('p3')">Proyecto 3</button>
-        <div id="p3" class="project-sub">
-          <button class="form-group">Chat</button>
-          <button class="form-group">Guiones</button>
-          <button class="form-group">Recomendaciones mágicas</button>
-        </div>
+<main>
+  <!-- Panel izquierdo -->
+  <aside class="panel left">
+    <h3>Herramientas</h3>
+    <div class="form-group">
+      <button onclick="mostrarNuevaIdea()">Nueva idea</button>
+      <button onclick="toggleSub('p1')">Proyecto 1</button>
+      <div id="p1" class="project-sub">
+        <button class="form-group">Chat</button>
+        <button class="form-group">Guiones</button>
+        <button class="form-group">Recomendaciones mágicas</button>
       </div>
-    </aside>
-
-    <!-- Panel central -->
-    <section class="panel middle">
-      <h2>Zona Central</h2>
-      <div class="chat-log" id="chat-log">
-        <p><strong>Usuario:</strong> Hola</p>
-
-<p><strong>Xera:</strong></p>
-<p>¡Hola! ¡Qué bueno que estés aquí! Soy tu asistente virtual especializado en ayudarte a crear reels impactantes para tu negocio o podcast, listos para que nos los envíes a editar.</p>
-<p>Mi objetivo es que tú te enfoques en lo tuyo, pienses lo mínimo en la creación de contenido y, aun así, tengas un flujo constante de reels de alta calidad que te ayuden a crecer.</p>
-<p>Para empezar y poder darte la mejor estrategia personalizada, necesito conocerte un poco mejor. Cuéntame:</p>
-<ul>
-  <li>¿Tienes un negocio o un podcast?</li>
-  <li>¿Cuál es tu nicho o tema principal?</li>
-</ul>
-
-<p><strong>Usuario:</strong> Tengo una frutería</p>
-
-<p><strong>Xera:</strong></p>
-<p>¡Excelente! Una frutería tiene un potencial visual ENORME para reels. ¡Piensa en todos esos colores, texturas y la frescura que puedes transmitir!</p>
-
-<p><strong>Tu estrategia principal debe girar en torno a:</strong></p>
-<ul>
-  <li><strong>El Atractivo Visual:</strong> Frutas y verduras son naturalmente fotogénicas.</li>
-  <li><strong>La Frescura y Calidad:</strong> Mostrar lo mejor de tus productos.</li>
-  <li><strong>Utilidad y Consejos:</strong> Cómo elegir, conservar, preparar.</li>
-  <li><strong>Conexión Local:</strong> Si es relevante, destacar que eres el negocio del barrio.</li>
-</ul>
-
-<p>Aquí tienes ideas concretas para que empieces a grabar YA MISMO (recuerda, graba varias tomas de cada idea, diferentes ángulos, ¡más es mejor para la edición!):</p>
-
-<p><strong>Ideas de Reels para tu Frutería (¡Graba varias escenas de cada una!):</strong></p>
-
-<p><strong>"La Llegada de lo Fresco":</strong></p>
-<p><strong>Escenas a grabar:</strong></p>
-<ul>
-  <li>Tú (o un empleado) descargando cajas de fruta/verdura nueva.</li>
-  <li>Primeros planos de las frutas más vistosas recién salidas de la caja (ej. fresas brillantes, mangos coloridos).</li>
-  <li>Manos colocando cuidadosamente la fruta en los exhibidores.</li>
-  <li>Un paneo general del exhibidor lleno y atractivo.</li>
-</ul>
-
-<p><strong>Audio sugerido:</strong> Música alegre, enérgica. Puedes añadir un texto tipo: "¡Recién llegado! La frescura que mereces."</p>
-
-<p><strong>"Elige la Fruta Perfecta como un Experto":</strong></p>
-<p><strong>Escenas a grabar:</strong></p>
-<ul>
-  <li>Tú sosteniendo dos piezas de la misma fruta (una buena, una no tanto, si es sutil la diferencia).</li>
-  <li>Primer plano de tus manos mostrando cómo olerla, tocarla (suavemente), o qué color buscar. (Ej. "Para un aguacate perfecto, busca que ceda un poco al tacto, así").</li>
-  <li>Graba esto con 2-3 frutas diferentes (un reel por fruta o un compilado).</li>
-</ul>
-
-<p><strong>Audio sugerido:</strong> Tu voz explicando el tip, o música de fondo y texto superpuesto con el consejo.</p>
-
-
+      <button onclick="toggleSub('p2')">Proyecto 2</button>
+      <div id="p2" class="project-sub" style="display: none;">
+        <button class="form-group">Chat</button>
+        <button class="form-group">Guiones</button>
+        <button class="form-group">Recomendaciones mágicas</button>
       </div>
-      <div class="chat-input">
-        <textarea rows="2" placeholder="Escribe tu idea o comentario..."></textarea>
-        <button>Enviar</button>
+      <button onclick="toggleSub('p3')">Proyecto 3</button>
+      <div id="p3" class="project-sub" style="display: none;">
+        <button class="form-group">Chat</button>
+        <button class="form-group">Guiones</button>
+        <button class="form-group">Recomendaciones mágicas</button>
       </div>
-    </section>
+    </div>
+  </aside>
 
-    <!-- Panel derecho -->
-    <aside class="panel right">
+  <!-- Panel central -->
+  <section id="panel-middle" class="panel middle">
+    <h2>Zona Central</h2>
+    <p>Aquí se desplegará el contenido principal según la herramienta seleccionada.</p>
+  </section>
+
+  <!-- Panel derecho -->
+  <aside id="panel-right" class="panel right">
+    <h3>Opciones</h3>
+    <p>Aquí podrán ir botones como "Guardar idea", "Desechar idea", "Generar guión", etc.</p>
+  </aside>
+</main>
+
+<script>
+  function toggleSub(id) {
+    const el = document.getElementById(id);
+    el.style.display = el.style.display === "none" ? "block" : "none";
+  }
+
+  function mostrarNuevaIdea() {
+    const middle = document.getElementById("panel-middle");
+    const right = document.getElementById("panel-right");
+
+    middle.innerHTML = `
+      <div class="idea-tabs">
+        <div class="idea-tab">Nueva idea <button>&times;</button></div>
+        <div class="idea-tab">Ideas para cyber monday <button>&times;</button></div>
+        <div class="idea-tab">Ideas para clientes de región <button>&times;</button></div>
+        <div class="idea-tab">Idea 1 <button>&times;</button></div>
+        <div class="idea-tab">Idea 2 <button>&times;</button></div>
+      </div>
+      <div class="idea-chat-input">
+        <textarea rows="2" placeholder="Escribir aquí..."></textarea>
+        <button>&#9658;</button>
+      </div>
+    `;
+
+    right.innerHTML = `
       <h3>Opciones</h3>
-      <button>Ideas recientes</button>
-      <button>Ideas del proyecto</button>
-      <button>Generar guión</button>
-      <button>Recursos del proyecto</button>
-    </aside>
-  </main>
+      <div class="tools-right">
+        <button>Resumir y analizar</button>
+        <button>Guardar idea</button>
+        <button>Asignar a proyecto</button>
+        <button>Generar guión</button>
+        <button>Desechar idea</button>
+        <button style="margin-top: 1.5rem;">Mis ideas</button>
+      </div>
+    `;
+  }
 
-  <script>
-    function toggleSub(id) {
-      const el = document.getElementById(id);
-      el.style.display = el.style.display === "none" ? "block" : "none";
-    }
+  document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("p1").style.display = "none";
+    fetch("menu.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("menu-placeholder").innerHTML = html;
+      });
+  });
+</script>
 
-    document.addEventListener("DOMContentLoaded", function () {
-      document.getElementById("p1").style.display = "block";
-      document.getElementById("p2").style.display = "none";
-      document.getElementById("p3").style.display = "none";
-
-      fetch("menu.html")
-        .then(res => res.text())
-        .then(html => {
-          document.getElementById("menu-placeholder").innerHTML = html;
-        });
-    });
-  </script>
 </body>
 </html>
