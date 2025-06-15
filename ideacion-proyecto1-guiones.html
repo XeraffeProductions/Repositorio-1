@@ -1,0 +1,131 @@
+<style>
+  .guiones-container {
+    border: 1px solid black;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+  }
+
+  .objetivo-box {
+    padding: 5px 10px;
+    font-style: italic;
+    border-bottom: 1px solid black;
+  }
+
+  .objetivo-area {
+    flex: 1;
+    border-bottom: 1px solid black;
+  }
+
+  .guiones-row {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid black;
+    flex: 2;
+  }
+
+  .guion-col {
+    flex: 1;
+    border-right: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+  }
+
+  .guion-col:last-child {
+    border-right: none;
+  }
+
+  .tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 5px;
+  }
+
+  .tab {
+    border: 1px solid black;
+    padding: 3px 6px;
+    background-color: white;
+    font-size: 0.9rem;
+  }
+
+  .guion-input {
+    display: flex;
+    margin-top: auto;
+  }
+
+  .guion-input input {
+    flex: 1;
+    padding: 4px;
+    font-style: italic;
+  }
+
+  .guion-input button {
+    padding: 4px 8px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .guion-footer {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .guion-footer textarea {
+    flex: 1;
+    height: 60px;
+    resize: none;
+    font-style: italic;
+    padding: 4px;
+  }
+
+  .guion-footer button {
+    padding: 4px 8px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+</style>
+
+<div class="guiones-container">
+  <!-- Objetivo -->
+  <div class="objetivo-box">Objetivo(s) (opcional)</div>
+  <div class="objetivo-area"></div>
+
+  <!-- Guiones en dos columnas -->
+  <div class="guiones-row">
+    <div class="guion-col">
+      <div class="tabs">
+        <div class="tab">Guion 1 ✖</div>
+        <div class="tab">Guion 2 ✖</div>
+        <div class="tab">Guion 3 ✖</div>
+        <div class="tab">Nuevo ✖</div>
+      </div>
+      <div class="guion-input">
+        <input type="text" placeholder="Escribir aquí..." />
+        <button>➤</button>
+      </div>
+    </div>
+
+    <div class="guion-col">
+      <div class="tabs">
+        <div class="tab">Guion 1 ✖</div>
+        <div class="tab">Guion 2 ✖</div>
+        <div class="tab">Guion 3 ✖</div>
+        <div class="tab">Nuevo ✖</div>
+      </div>
+      <div class="guion-input">
+        <input type="text" placeholder="Escribir aquí..." />
+        <button>➤</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="guion-footer">
+    <textarea placeholder="Escribir aquí..."></textarea>
+    <button>➤</button>
+  </div>
+</div>
