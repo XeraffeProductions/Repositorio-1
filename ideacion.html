@@ -52,26 +52,22 @@
       text-align: left;
     }
 
+    .right button {
+      display: block;
+      width: 100%;
+      margin-bottom: 1rem; /* Espacio más amplio entre botones */
+      padding: 0.75rem;
+      font-weight: bold;
+      border: 1px solid #555;
+      background: white;
+      cursor: pointer;
+    }
+
     .project-sub {
       margin-left: 1rem;
       margin-bottom: 0.5rem;
       display: none;
     }
-
-    .right button {
-      margin-bottom: 0.75rem;
-      width: 100%;
-      padding: 0.5rem;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-.form-group .sub-button {
-      margin-bottom: 0.4rem;
-      padding: 0.4rem;
-      font-size: 0.95rem;
-    }
-
   </style>
 </head>
 <body>
@@ -79,39 +75,35 @@
 
   <main>
     <!-- Panel izquierdo -->
-<aside class="panel left">
-  <h3>Herramientas</h3>
-  <div class="form-group">
-    <button onclick="mostrarContenido('ideacion-nueva-idea.html', 'nueva')">Nueva idea</button>
+    <aside class="panel left">
+      <h3>Herramientas</h3>
+      <div class="form-group">
+        <button onclick="mostrarContenido('ideacion-nueva-idea.html', 'nueva')">Nueva idea</button>
+        <button onclick="toggleSub('p1')">Proyecto 1</button>
+        <div id="p1" class="project-sub">
+          <button onclick="mostrarContenido('ideacion-proyecto1-chat.html', 'chat')">Chat</button>
+          <button>Guiones</button>
+          <button>Recomendaciones mágicas</button>
+        </div>
+        <button onclick="toggleSub('p2')">Proyecto 2</button>
+        <div id="p2" class="project-sub">
+          <button>Chat</button>
+          <button>Guiones</button>
+          <button>Recomendaciones mágicas</button>
+        </div>
+        <button onclick="toggleSub('p3')">Proyecto 3</button>
+        <div id="p3" class="project-sub">
+          <button>Chat</button>
+          <button>Guiones</button>
+          <button>Recomendaciones mágicas</button>
+        </div>
+      </div>
+    </aside>
 
-    <button onclick="toggleSub('p1')">Proyecto 1</button>
-    <div id="p1" class="project-sub">
-      <button class="sub-button" onclick="mostrarContenido('ideacion-proyecto1-chat.html', 'chat')">Chat</button>
-      <button class="sub-button">Guiones</button>
-      <button class="sub-button">Recomendaciones mágicas</button>
-    </div>
-
-    <button onclick="toggleSub('p2')">Proyecto 2</button>
-    <div id="p2" class="project-sub">
-      <button class="sub-button">Chat</button>
-      <button class="sub-button">Guiones</button>
-      <button class="sub-button">Recomendaciones mágicas</button>
-    </div>
-
-    <button onclick="toggleSub('p3')">Proyecto 3</button>
-    <div id="p3" class="project-sub">
-      <button class="sub-button">Chat</button>
-      <button class="sub-button">Guiones</button>
-      <button class="sub-button">Recomendaciones mágicas</button>
-    </div>
-  </div>
-</aside>
-
-
-    <!-- Zona central -->
+    <!-- Panel central dinámico -->
     <section class="panel middle" id="middle-content"></section>
 
-    <!-- Zona derecha -->
+    <!-- Panel derecho dinámico -->
     <aside class="panel right" id="right-panel"></aside>
   </main>
 
@@ -127,7 +119,6 @@
         .then(html => {
           document.getElementById("middle-content").innerHTML = html;
 
-          // Cambiar las herramientas de la derecha según el tipo
           if (tipo === "nueva") {
             document.getElementById("right-panel").innerHTML = `
               <h3>Opciones</h3>
@@ -155,13 +146,9 @@
         .then(res => res.text())
         .then(html => {
           document.getElementById("menu-placeholder").innerHTML = html;
+          // ✅ Mostrar por defecto la vista "Nueva idea"
+          mostrarContenido("ideacion-nueva-idea.html", "nueva");
         });
-
-      // Mostrar "Nueva idea" por defecto
-      mostrarContenido("ideacion-nueva-idea.html", "nueva");
-
-      // Asegurar que Proyecto 1 quede desplegado
-      document.getElementById("p1").style.display = "block";
     });
   </script>
 </body>
