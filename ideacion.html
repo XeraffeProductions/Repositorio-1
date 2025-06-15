@@ -79,20 +79,34 @@
 
   <main>
     <!-- Panel izquierdo -->
-    <aside class="panel left">
-      <h3>Herramientas</h3>
-      <div class="form-group">
-        <button onclick="mostrarContenido('ideacion-nueva-idea.html', 'nueva')">Nueva idea</button>
-        <button onclick="toggleSub('p1')">Proyecto 1</button>
-        <div id="p1" class="project-sub">
-          <button onclick="mostrarContenido('ideacion-proyecto1-chat.html', 'chat')">Chat</button>
-        </div>
-        <button onclick="toggleSub('p2')">Proyecto 2</button>
-        <div id="p2" class="project-sub"></div>
-        <button onclick="toggleSub('p3')">Proyecto 3</button>
-        <div id="p3" class="project-sub"></div>
-      </div>
-    </aside>
+<aside class="panel left">
+  <h3>Herramientas</h3>
+  <div class="form-group">
+    <button onclick="mostrarContenido('ideacion-nueva-idea.html', 'nueva')">Nueva idea</button>
+
+    <button onclick="toggleSub('p1')">Proyecto 1</button>
+    <div id="p1" class="project-sub">
+      <button class="sub-button" onclick="mostrarContenido('ideacion-proyecto1-chat.html', 'chat')">Chat</button>
+      <button class="sub-button">Guiones</button>
+      <button class="sub-button">Recomendaciones mágicas</button>
+    </div>
+
+    <button onclick="toggleSub('p2')">Proyecto 2</button>
+    <div id="p2" class="project-sub">
+      <button class="sub-button">Chat</button>
+      <button class="sub-button">Guiones</button>
+      <button class="sub-button">Recomendaciones mágicas</button>
+    </div>
+
+    <button onclick="toggleSub('p3')">Proyecto 3</button>
+    <div id="p3" class="project-sub">
+      <button class="sub-button">Chat</button>
+      <button class="sub-button">Guiones</button>
+      <button class="sub-button">Recomendaciones mágicas</button>
+    </div>
+  </div>
+</aside>
+
 
     <!-- Zona central -->
     <section class="panel middle" id="middle-content"></section>
