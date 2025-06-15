@@ -32,6 +32,7 @@
       display: flex;
       flex-direction: column;
       padding: 1.5rem;
+      overflow-y: auto;
     }
 
     .right {
@@ -56,45 +57,20 @@
       margin-bottom: 0.5rem;
       display: none;
     }
-
-    .chat-log {
-      flex: 1;
-      border: 1px solid #ccc;
-      padding: 1rem;
-      background: white;
-      overflow-y: auto;
-      margin-bottom: 1rem;
-    }
-
-    .chat-input {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .chat-input textarea {
-      flex: 1;
-      padding: 0.5rem;
-      resize: none;
-    }
-
-    .chat-input button {
-      padding: 0.5rem 1rem;
-      font-weight: bold;
-      cursor: pointer;
-    }
   </style>
 </head>
 <body>
   <div id="menu-placeholder"></div>
 
   <main>
+    <!-- Panel izquierdo -->
     <aside class="panel left">
       <h3>Herramientas</h3>
       <div class="form-group">
-        <button onclick="mostrarNuevaIdea()">Nueva idea</button>
+        <button onclick="mostrarContenido('ideacion-nueva-idea.html', 'nueva')">Nueva idea</button>
         <button onclick="toggleSub('p1')">Proyecto 1</button>
         <div id="p1" class="project-sub">
-          <button onclick="mostrarChatProyecto1()">Chat</button>
+          <button onclick="mostrarContenido('ideacion-proyecto1-chat.html', 'chat')">Chat</button>
         </div>
         <button onclick="toggleSub('p2')">Proyecto 2</button>
         <div id="p2" class="project-sub"></div>
@@ -103,8 +79,10 @@
       </div>
     </aside>
 
+    <!-- Zona central -->
     <section class="panel middle" id="middle-content"></section>
 
+    <!-- Zona derecha -->
     <aside class="panel right" id="right-panel"></aside>
   </main>
 
@@ -114,43 +92,33 @@
       el.style.display = el.style.display === "none" ? "block" : "none";
     }
 
-    function mostrarNuevaIdea() {
-      document.getElementById("middle-content").innerHTML = `
-        <div class="chat-log"></div>
-        <div class="chat-input">
-          <input type="text" placeholder="Escribir aqui..." style="flex: 1" />
-          <button>➤</button>
-        </div>
-      `;
-      document.getElementById("right-panel").innerHTML = `
-        <h3>Opciones</h3>
-        <button>Resumir y analizar</button>
-        <button>Guardar idea</button>
-        <button>Asignar a proyecto</button>
-        <button>Generar guión</button>
-        <button>Desechar idea</button>
-        <button>Mis ideas</button>
-      `;
-    }
+    function mostrarContenido(archivo, tipo) {
+      fetch(archivo)
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById("middle-content").innerHTML = html;
 
-    function mostrarChatProyecto1() {
-      document.getElementById("middle-content").innerHTML = `
-        <div class="chat-log">
-          <p><strong>Usuario:</strong> Hola</p>
-          <p><strong>Xera:</strong> ¡Hola! ¡Qué bueno que estés aquí!...</p>
-        </div>
-        <div class="chat-input">
-          <textarea rows="2" placeholder="Escribe tu idea o comentario..."></textarea>
-          <button>Enviar</button>
-        </div>
-      `;
-      document.getElementById("right-panel").innerHTML = `
-        <h3>Opciones</h3>
-        <button>Ideas recientes</button>
-        <button>Ideas del proyecto</button>
-        <button>Generar guión</button>
-        <button>Recursos del proyecto</button>
-      `;
+          // Cambiar las herramientas de la derecha según el tipo
+          if (tipo === "nueva") {
+            document.getElementById("right-panel").innerHTML = `
+              <h3>Opciones</h3>
+              <button>Resumir y analizar</button>
+              <button>Guardar idea</button>
+              <button>Asignar a proyecto</button>
+              <button>Generar guión</button>
+              <button>Desechar idea</button>
+              <button>Mis ideas</button>
+            `;
+          } else if (tipo === "chat") {
+            document.getElementById("right-panel").innerHTML = `
+              <h3>Opciones</h3>
+              <button>Ideas recientes</button>
+              <button>Ideas del proyecto</button>
+              <button>Generar guión</button>
+              <button>Recursos del proyecto</button>
+            `;
+          }
+        });
     }
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -158,8 +126,13 @@
         .then(res => res.text())
         .then(html => {
           document.getElementById("menu-placeholder").innerHTML = html;
-          mostrarNuevaIdea(); // Mostrar nueva idea por defecto
         });
+
+      // Mostrar "Nueva idea" por defecto
+      mostrarContenido("ideacion-nueva-idea.html", "nueva");
+
+      // Asegurar que Proyecto 1 quede desplegado
+      document.getElementById("p1").style.display = "block";
     });
   </script>
 </body>
