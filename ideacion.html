@@ -5,8 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ideación - Xeraffé</title>
   <style>
-    body { font-family: sans-serif; margin: 0; padding: 0; }
-    main { display: flex; height: 100vh; }
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    main {
+      display: flex;
+      height: 100vh;
+    }
 
     .panel {
       box-sizing: border-box;
@@ -46,152 +54,113 @@
     .project-sub {
       margin-left: 1rem;
       margin-bottom: 0.5rem;
+      display: none;
     }
 
-    .idea-tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
+    .chat-log {
+      flex: 1;
+      border: 1px solid #ccc;
+      padding: 1rem;
+      background: white;
+      overflow-y: auto;
       margin-bottom: 1rem;
     }
 
-    .idea-tab {
-      background-color: #eee;
-      padding: 0.3rem 0.5rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
-
-    .idea-tab button {
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .idea-chat-input {
+    .chat-input {
       display: flex;
       gap: 0.5rem;
     }
 
-    .idea-chat-input textarea {
+    .chat-input textarea {
       flex: 1;
       padding: 0.5rem;
       resize: none;
-      font-style: italic;
     }
 
-    .idea-chat-input button {
+    .chat-input button {
       padding: 0.5rem 1rem;
       font-weight: bold;
       cursor: pointer;
     }
-
-    .tools-right button {
-      width: 100%;
-      margin-bottom: 0.75rem;
-      padding: 0.6rem;
-      border: 1px solid #333;
-      background: white;
-      cursor: pointer;
-      text-align: left;
-      font-weight: bold;
-    }
   </style>
 </head>
 <body>
+  <div id="menu-placeholder"></div>
 
-<div id="menu-placeholder"></div>
-
-<main>
-  <!-- Panel izquierdo -->
-  <aside class="panel left">
-    <h3>Herramientas</h3>
-    <div class="form-group">
-      <button onclick="mostrarNuevaIdea()">Nueva idea</button>
-      <button onclick="toggleSub('p1')">Proyecto 1</button>
-      <div id="p1" class="project-sub">
-        <button class="form-group">Chat</button>
-        <button class="form-group">Guiones</button>
-        <button class="form-group">Recomendaciones mágicas</button>
+  <main>
+    <aside class="panel left">
+      <h3>Herramientas</h3>
+      <div class="form-group">
+        <button onclick="mostrarNuevaIdea()">Nueva idea</button>
+        <button onclick="toggleSub('p1')">Proyecto 1</button>
+        <div id="p1" class="project-sub">
+          <button onclick="mostrarChatProyecto1()">Chat</button>
+        </div>
+        <button onclick="toggleSub('p2')">Proyecto 2</button>
+        <div id="p2" class="project-sub"></div>
+        <button onclick="toggleSub('p3')">Proyecto 3</button>
+        <div id="p3" class="project-sub"></div>
       </div>
-      <button onclick="toggleSub('p2')">Proyecto 2</button>
-      <div id="p2" class="project-sub" style="display: none;">
-        <button class="form-group">Chat</button>
-        <button class="form-group">Guiones</button>
-        <button class="form-group">Recomendaciones mágicas</button>
-      </div>
-      <button onclick="toggleSub('p3')">Proyecto 3</button>
-      <div id="p3" class="project-sub" style="display: none;">
-        <button class="form-group">Chat</button>
-        <button class="form-group">Guiones</button>
-        <button class="form-group">Recomendaciones mágicas</button>
-      </div>
-    </div>
-  </aside>
+    </aside>
 
-  <!-- Panel central -->
-  <section id="panel-middle" class="panel middle">
-    <h2>Zona Central</h2>
-    <p>Aquí se desplegará el contenido principal según la herramienta seleccionada.</p>
-  </section>
+    <section class="panel middle" id="middle-content"></section>
 
-  <!-- Panel derecho -->
-  <aside id="panel-right" class="panel right">
-    <h3>Opciones</h3>
-    <p>Aquí podrán ir botones como "Guardar idea", "Desechar idea", "Generar guión", etc.</p>
-  </aside>
-</main>
+    <aside class="panel right" id="right-panel"></aside>
+  </main>
 
-<script>
-  function toggleSub(id) {
-    const el = document.getElementById(id);
-    el.style.display = el.style.display === "none" ? "block" : "none";
-  }
+  <script>
+    function toggleSub(id) {
+      const el = document.getElementById(id);
+      el.style.display = el.style.display === "none" ? "block" : "none";
+    }
 
-  function mostrarNuevaIdea() {
-    const middle = document.getElementById("panel-middle");
-    const right = document.getElementById("panel-right");
-
-    middle.innerHTML = `
-      <div class="idea-tabs">
-        <div class="idea-tab">Nueva idea <button>&times;</button></div>
-        <div class="idea-tab">Ideas para cyber monday <button>&times;</button></div>
-        <div class="idea-tab">Ideas para clientes de región <button>&times;</button></div>
-        <div class="idea-tab">Idea 1 <button>&times;</button></div>
-        <div class="idea-tab">Idea 2 <button>&times;</button></div>
-      </div>
-      <div class="idea-chat-input">
-        <textarea rows="2" placeholder="Escribir aquí..."></textarea>
-        <button>&#9658;</button>
-      </div>
-    `;
-
-    right.innerHTML = `
-      <h3>Opciones</h3>
-      <div class="tools-right">
+    function mostrarNuevaIdea() {
+      document.getElementById("middle-content").innerHTML = `
+        <div class="chat-log"></div>
+        <div class="chat-input">
+          <input type="text" placeholder="Escribir aqui..." style="flex: 1" />
+          <button>➤</button>
+        </div>
+      `;
+      document.getElementById("right-panel").innerHTML = `
+        <h3>Opciones</h3>
         <button>Resumir y analizar</button>
         <button>Guardar idea</button>
         <button>Asignar a proyecto</button>
         <button>Generar guión</button>
         <button>Desechar idea</button>
-        <button style="margin-top: 1.5rem;">Mis ideas</button>
-      </div>
-    `;
-  }
+        <button>Mis ideas</button>
+      `;
+    }
 
-  document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("p1").style.display = "none";
-    fetch("menu.html")
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById("menu-placeholder").innerHTML = html;
-      });
-  });
-</script>
+    function mostrarChatProyecto1() {
+      document.getElementById("middle-content").innerHTML = `
+        <div class="chat-log">
+          <p><strong>Usuario:</strong> Hola</p>
+          <p><strong>Xera:</strong> ¡Hola! ¡Qué bueno que estés aquí!...</p>
+        </div>
+        <div class="chat-input">
+          <textarea rows="2" placeholder="Escribe tu idea o comentario..."></textarea>
+          <button>Enviar</button>
+        </div>
+      `;
+      document.getElementById("right-panel").innerHTML = `
+        <h3>Opciones</h3>
+        <button>Ideas recientes</button>
+        <button>Ideas del proyecto</button>
+        <button>Generar guión</button>
+        <button>Recursos del proyecto</button>
+      `;
+    }
 
+    document.addEventListener("DOMContentLoaded", function () {
+      fetch("menu.html")
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById("menu-placeholder").innerHTML = html;
+          mostrarNuevaIdea(); // Mostrar nueva idea por defecto
+        });
+    });
+  </script>
 </body>
 </html>
