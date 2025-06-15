@@ -76,7 +76,7 @@
   <main>
     <!-- Panel izquierdo -->
     <aside class="panel left">
-      <h3>Herramientas</h3>
+      <h3>Proyectos</h3>
       <div class="form-group">
         <button onclick="mostrarContenido('ideacion-nueva-idea.html', 'nueva')">Nueva idea</button>
         <button onclick="toggleSub('p1')">Proyecto 1</button>
@@ -140,9 +140,10 @@
 } else if (tipo === "guiones") {
   document.getElementById("right-panel").innerHTML = `
     <h3>Herramientas de guión</h3>
-    <button>Exportar guión</button>
-    <button>Plantillas</button>
-    <button>Compartir</button>
+    <button>Convertir en guion oficial</button>
+    <button>Calendarizar</button>
+    <button>Editar ahora (generar orden)</button>
+    <button>Comparar</button>
   `;
 }
 
