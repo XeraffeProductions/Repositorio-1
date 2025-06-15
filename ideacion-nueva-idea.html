@@ -1,74 +1,77 @@
 <style>
-.idea-wrapper {
-  border: 1px solid #000;
-  display: flex;
-  flex-direction: column;
-  height: 300px; /* ajusta según tu diseño */
-  justify-content: space-between;
-  background-color: white;
-}
+  .idea-wrapper {
+    border: 1px solid #000;
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    justify-content: space-between;
+    background-color: white;
+  }
 
-.idea-content {
-  flex: 1;
-  padding: 1rem;
-  /* border-bottom: 1px solid #000; */ /* Esta línea fue removida */
-}
+  .idea-content {
+    flex: 1;
+    padding: 1rem;
+    border-bottom: 1px solid #000; /* Línea divisoria */
+  }
 
-.idea-footer {
-  padding: 0.5rem;
-}
+  .idea-footer {
+    padding: 0.5rem;
+  }
 
-.idea-tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3rem;
-  margin-bottom: 0.5rem;
-}
+  .idea-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-bottom: 0.5rem;
+  }
 
-.tab {
-  background: white;
-  border: 1px solid black;
-  padding: 0.2rem 0.4rem;
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-}
+  .tab {
+    background: white;
+    border: 1px solid black;
+    padding: 0.2rem 0.4rem;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+  }
 
-.tab .close {
-  margin-left: 0.4rem;
-  cursor: pointer;
-  font-weight: bold;
-}
+  .tab .close {
+    margin-left: 0.4rem;
+    cursor: pointer;
+    font-weight: bold;
+  }
 
-.idea-input {
-  display: flex;
-  gap: 0.3rem;
-}
+  .idea-input {
+    display: flex;
+    gap: 0.3rem;
+  }
 
-.idea-input input {
-  flex: 1;
-  padding: 0.3rem;
-  font-style: italic;
-}
+  .idea-input input {
+    flex: 1;
+    padding: 0.3rem;
+    font-style: italic;
+  }
 
-.idea-input button {
-  padding: 0.3rem 0.8rem;
-  cursor: pointer;
-}
-
+  .idea-input button {
+    padding: 0.3rem 0.8rem;
+    cursor: pointer;
+  }
 </style>
 
-<div class="nueva-idea-wrapper">
-  <div class="tabs-container">
-    <div class="tab">Nueva idea <button onclick="this.parentElement.remove()">✖</button></div>
-    <div class="tab">Ideas para cyber monday <button onclick="this.parentElement.remove()">✖</button></div>
-    <div class="tab">Ideas para clientes de región <button onclick="this.parentElement.remove()">✖</button></div>
-    <div class="tab">Idea 1 <button onclick="this.parentElement.remove()">✖</button></div>
-    <div class="tab">Idea 2 <button onclick="this.parentElement.remove()">✖</button></div>
+<div class="idea-wrapper">
+  <div class="idea-content">
+    <!-- Aquí irán las ideas escritas -->
   </div>
-
-  <div class="input-container">
-    <input type="text" placeholder="Escribir aquí..." />
-    <button>➤</button>
+  <div class="idea-footer">
+    <div class="idea-tabs">
+      <div class="tab">Nueva idea <span class="close">✖</span></div>
+      <div class="tab">Ideas para cyber monday <span class="close">✖</span></div>
+      <div class="tab">Ideas para clientes de región <span class="close">✖</span></div>
+      <div class="tab">Idea 1 <span class="close">✖</span></div>
+      <div class="tab">Idea 2 <span class="close">✖</span></div>
+    </div>
+    <div class="idea-input">
+      <input type="text" placeholder="Escribir aquí..." />
+      <button>➤</button>
+    </div>
   </div>
 </div>
