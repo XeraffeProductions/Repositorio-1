@@ -13,6 +13,7 @@
   const imgBase64 = localStorage.getItem('imagenGuion');
   if (imgBase64) {
     img.src = imgBase64;
+    img.onload = () => img.style.display = 'block'; // asegura que se renderice
     img.style.display = 'block';
   }
 
