@@ -1,37 +1,6 @@
-<!-- Reemplazo total de la parte central por input de imagen sin bordes y con límites de tamaño -->
-<div style="padding: 8px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-  <label style="font-style: italic; margin-bottom: 8px; font-family: sans-serif;">Sube una imagen del guion</label>
-  <input id="imagenGuionInput" type="file" accept="image/*" style="font-style: italic; margin-bottom: 12px;" />
-  <img id="imagenGuionVista" src="" alt="Vista previa" style="max-width: 400px; max-height: 400px; display: none; border: 1px solid #ccc; padding: 4px;" />
+<div style="display: flex; justify-content: center; align-items: center; height: 500px;">
+  <div style="border: 1px solid black; padding: 16px; width: 80%; max-width: 800px; font-family: sans-serif;">
+    <h2 style="text-align: center; font-style: italic; font-weight: normal;">Objetivo(s) opcional</h2>
+    <div style="border: 1px solid black; height: 300px; margin-top: 20px;"></div>
+  </div>
 </div>
-
-<script>
-  const input = document.getElementById('imagenGuionInput');
-  const img = document.getElementById('imagenGuionVista');
-
-  // Cargar imagen desde localStorage al iniciar
-  const imgBase64 = localStorage.getItem('imagenGuion');
-  if (imgBase64) {
-    img.src = imgBase64;
-    img.onload = () => img.style.display = 'block';
-    img.style.display = 'block';
-  }
-
-  input.addEventListener('change', function (e) {
-    const file = e.target.files[0];
-    if (file) {
-      if (file.size > 2 * 1024 * 1024) {
-        alert("El archivo es demasiado grande. Elige una imagen de menos de 2MB.");
-        return;
-      }
-      const reader = new FileReader();
-      reader.onload = function (event) {
-        const base64 = event.target.result;
-        localStorage.setItem('imagenGuion', base64);
-        img.src = base64;
-        img.style.display = 'block';
-      };
-      reader.readAsDataURL(file);
-    }
-  });
-</script>
