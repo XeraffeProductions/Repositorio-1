@@ -80,7 +80,18 @@
 
       <!-- Sub-secciones -->
       <div id="c1" class="sub-section"><h3>Modo básico</h3><input type="file" onchange="previewImage(event, 'p1')"><img id="p1" class="image-preview" /></div>
-      <div id="c2" class="sub-section"><h3>Modo avanzado</h3><input type="file" onchange="previewImage(event, 'p2')"><img id="p2" class="image-preview" /></div>
+      <div id="c2" class="sub-section">
+  <h3>Modo avanzado</h3>
+
+  <!-- Primera imagen -->
+  <input type="file" onchange="previewAndSaveImage(event, 'p2a')">
+  <img id="p2a" class="image-preview" />
+
+  <!-- Segunda imagen -->
+  <input type="file" onchange="previewAndSaveImage(event, 'p2b')">
+  <img id="p2b" class="image-preview" />
+</div>
+
       <div id="c3" class="sub-section"><h3>Ejemplo 1</h3><input type="file" onchange="previewImage(event, 'p3')"><img id="p3" class="image-preview" /></div>
       <div id="c4" class="sub-section"><h3>Ejemplo 2</h3><input type="file" onchange="previewImage(event, 'p4')"><img id="p4" class="image-preview" /></div>
       <div id="c5" class="sub-section"><h3>Ejemplo 3</h3><input type="file" onchange="previewImage(event, 'p5')"><img id="p5" class="image-preview" /></div>
@@ -174,7 +185,30 @@ window.addEventListener("hashchange", handleHashChange);
       if (boton) boton.click();
     }
   });
-</script>
+
+  function previewAndSaveImage(event, id) {
+    const file = event.target.files[0];
+    const img = document.getElementById(id);
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        img.src = reader.result;
+        localStorage.setItem(id, reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  // Recuperar imágenes guardadas al cargar la página
+  document.addEventListener("DOMContentLoaded", () => {
+    ['p2a', 'p2b'].forEach(id => {
+      const dataUrl = localStorage.getItem(id);
+      if (dataUrl) {
+        const img = document.getElementById(id);
+        if (img) img.src = dataUrl;
+      }
+    });
+  });
 
   </script>
 
