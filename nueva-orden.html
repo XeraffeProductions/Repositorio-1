@@ -163,9 +163,22 @@
         <button onclick="showSub('l3')">Ejemplo 3</button>
       </div>
 
-      <div id="l1" class="sub-section"><h3>Ejemplo 1</h3><input type="file" onchange="previewImage(event, 'l1p')"><img id="l1p" class="image-preview" /></div>
-      <div id="l2" class="sub-section"><h3>Ejemplo 2</h3><input type="file" onchange="previewImage(event, 'l2p')"><img id="l2p" class="image-preview" /></div>
-      <div id="l3" class="sub-section"><h3>Ejemplo 3</h3><input type="file" onchange="previewImage(event, 'l3p')"><img id="l3p" class="image-preview" /></div>
+      <div id="l1" class="sub-section">
+  <h3>Modo básico</h3>
+  <input type="file" onchange="previewImage(event, 'l1p')">
+  <img id="l1p" class="image-preview" />
+</div>
+
+<div id="l2" class="sub-section">
+  <h3>Modo avanzado</h3>
+  <input type="file" onchange="previewImage(event, 'l2p')">
+  <img id="l2p" class="image-preview" />
+</div>
+      <div id="l3" class="sub-section">
+  <h3>Modo avanzado</h3>
+  <input type="file" onchange="previewImage(event, 'l3p')">
+  <img id="l3p" class="image-preview" />
+</div>
     </section>
   </main>
 
