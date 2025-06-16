@@ -98,7 +98,18 @@
   }
 
   document.addEventListener("DOMContentLoaded", () => {
+    // Cargar ideas previas
     cargarIdeas();
+
+    // Cargar contenido externo del archivo central si existe
+    fetch("ideacion-nueva-idea-texto-central.html")
+      .then(res => res.text())
+      .then(html => {
+        const container = document.getElementById("ideaDisplay");
+        const wrapper = document.createElement("div");
+        wrapper.innerHTML = html;
+        container.appendChild(wrapper);
+      });
 
     const input = document.getElementById("ideaInput");
     const sendBtn = document.getElementById("sendBtn");
@@ -115,3 +126,4 @@
     });
   });
 </script>
+
