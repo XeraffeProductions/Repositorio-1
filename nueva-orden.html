@@ -193,14 +193,16 @@
     document.getElementById(id).classList.add("active");
   }
 
-  function previewImage(event, previewId) {
-    const reader = new FileReader();
-    reader.onload = function () {
-      document.getElementById(previewId).src = reader.result;
-      localStorage.setItem(previewId, reader.result);
-    };
-    reader.readAsDataURL(event.target.files[0]);
-  }
+function previewImage(event, previewId) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  compressImage(file, 800, 0.7, function(compressedDataUrl) {
+    document.getElementById(previewId).src = compressedDataUrl;
+    localStorage.setItem(previewId, compressedDataUrl);
+  });
+}
+
 
   // Recuperar TODAS las imágenes al cargar
   document.addEventListener("DOMContentLoaded", () => {
@@ -244,6 +246,25 @@
       showSection("cortas");
     }
   });
+
+  function compressImage(file, maxWidth = 800, quality = 0.7, callback) {
+  const reader = new FileReader();
+  reader.onload = function(event) {
+    const img = new Image();
+    img.onload = function() {
+      const canvas = document.createElement("canvas");
+      const scaleFactor = maxWidth / img.width;
+      canvas.width = maxWidth;
+      canvas.height = img.height * scaleFactor;
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      const compressedDataUrl = canvas.toDataURL("image/jpeg", quality);
+      callback(compressedDataUrl);
+    };
+    img.src = event.target.result;
+  };
+  reader.readAsDataURL(file);
+}
 </script>
 
 
