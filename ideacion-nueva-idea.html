@@ -67,9 +67,7 @@
 </style>
 
 <div class="idea-wrapper">
-  <div class="idea-content" id="ideaDisplay">
-    <!-- Aquí se mostrarán las ideas -->
-  </div>
+  <div class="idea-content" id="ideaDisplay"></div>
 
   <div class="idea-footer">
     <div class="idea-tabs">
@@ -87,32 +85,33 @@
 </div>
 
 <script>
-  const input = document.getElementById("ideaInput");
-  const sendBtn = document.getElementById("sendBtn");
-  const display = document.getElementById("ideaDisplay");
+  function cargarIdeas() {
+    const savedIdeas = JSON.parse(localStorage.getItem("ideasGuardadas")) || [];
+    const display = document.getElementById("ideaDisplay");
+    display.innerHTML = "";
+    savedIdeas.forEach(text => {
+      const div = document.createElement("div");
+      div.className = "idea-entry";
+      div.textContent = text;
+      display.appendChild(div);
+    });
+  }
 
-  // Cargar ideas guardadas
-  const savedIdeas = JSON.parse(localStorage.getItem("ideasGuardadas")) || [];
-  savedIdeas.forEach(text => {
-    const p = document.createElement("div");
-    p.className = "idea-entry";
-    p.textContent = text;
-    display.appendChild(p);
-  });
+  document.addEventListener("DOMContentLoaded", () => {
+    cargarIdeas();
 
-  // Guardar nueva idea
-  sendBtn.addEventListener("click", () => {
-    const text = input.value.trim();
-    if (text) {
-      const p = document.createElement("div");
-      p.className = "idea-entry";
-      p.textContent = text;
-      display.appendChild(p);
+    const input = document.getElementById("ideaInput");
+    const sendBtn = document.getElementById("sendBtn");
 
-      savedIdeas.push(text);
-      localStorage.setItem("ideasGuardadas", JSON.stringify(savedIdeas));
-
-      input.value = "";
-    }
+    sendBtn.addEventListener("click", () => {
+      const text = input.value.trim();
+      if (text) {
+        const savedIdeas = JSON.parse(localStorage.getItem("ideasGuardadas")) || [];
+        savedIdeas.push(text);
+        localStorage.setItem("ideasGuardadas", JSON.stringify(savedIdeas));
+        input.value = "";
+        cargarIdeas();
+      }
+    });
   });
 </script>
