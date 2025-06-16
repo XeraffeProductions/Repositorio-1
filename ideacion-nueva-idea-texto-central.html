@@ -4,14 +4,11 @@ Hola! como estas? tanto tiempo sin verte!
 
 <script>
   const textarea = document.getElementById('idea-textarea');
-
-  // Cargar texto guardado (si existe)
-  const guardado = localStorage.getItem('ideaTexto');
-  if (guardado !== null) {
-    textarea.value = guardado;
+  const saved = localStorage.getItem('ideaTexto');
+  if (saved !== null) {
+    textarea.value = saved;
   }
 
-  // Guardar cada vez que el usuario escriba
   textarea.addEventListener('input', () => {
     localStorage.setItem('ideaTexto', textarea.value);
   });
