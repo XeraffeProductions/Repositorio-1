@@ -1,40 +1,7 @@
 <div style="border: 1px solid black; padding: 8px; font-style: italic; font-family: sans-serif;">Objetivo(s) opcional</div>
 
-<div style="display: flex; gap: 10px; height: 600px;">
-  <!-- Lado izquierdo -->
-  <div style="flex: 1; display: flex; flex-direction: column; border: 1px solid black;">
-    <textarea style="height: 50%; width: 100%; font-style: italic; border: none; padding: 8px;"></textarea>
-    <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
-      <div style="padding: 4px; border-top: 1px solid black; display: flex; flex-wrap: wrap; gap: 4px;">
-        <button>Guion 1 ✖</button>
-        <button>Guion 2 ✖</button>
-        <button>Guion 3 ✖</button>
-        <button>Nuevo ✖</button>
-      </div>
-      <div style="padding: 4px; border-top: 1px solid black;">
-        <input type="text" placeholder="Escribir aquí..." style="width: 100%; font-style: italic;" />
-      </div>
-    </div>
-  </div>
-
-  <!-- Lado derecho -->
-  <div style="flex: 1; display: flex; flex-direction: column; border: 1px solid black;">
-    <textarea style="height: 50%; width: 100%; font-style: italic; border: none; padding: 8px;"></textarea>
-    <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
-      <div style="padding: 4px; border-top: 1px solid black; display: flex; flex-wrap: wrap; gap: 4px;">
-        <button>Guion 1 ✖</button>
-        <button>Guion 2 ✖</button>
-        <button>Guion 3 ✖</button>
-        <button>Nuevo ✖</button>
-      </div>
-      <div style="padding: 4px; border-top: 1px solid black;">
-        <input type="text" placeholder="Escribir aquí..." style="width: 100%; font-style: italic;" />
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Parte inferior general -->
-<div style="border: 1px solid black; margin-top: 8px;">
-  <input type="text" placeholder="Escribir aquí..." style="width: 100%; font-style: italic; border: none; padding: 8px;" />
+<!-- Reemplazo total de la parte central por input de imagen -->
+<div style="height: 600px; border: 1px solid black; margin-top: 8px; padding: 8px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+  <label style="font-style: italic; margin-bottom: 8px;">Sube una imagen del guion</label>
+  <input type="file" accept="image/*" style="font-style: italic;" />
 </div>
