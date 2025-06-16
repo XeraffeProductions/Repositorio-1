@@ -21,18 +21,17 @@
   <div id="menu-placeholder"></div>
 
   <main>
-<!-- Sección superior: Nueva Idea -->
-<section style="text-align: center; margin-top: 2rem;">
-  <h2 style="display: flex; justify-content: center; align-items: center; gap: 0.5rem;">
-    <span style="font-size: 1.5rem;">💡</span>
-    <span style="font-weight: bold;">Nueva Idea</span>
-  </h2>
-  <div style="display: flex; justify-content: center; margin-top: 1rem;">
-    <input type="text" placeholder="Escribe tu nueva idea aquí..." style="width: 60%; padding: 0.5rem; font-style: italic; border: 1px solid black;" />
-    <button style="padding: 0.5rem 1rem; background: white; border: 1px solid black; cursor: pointer;">➤</button>
-  </div>
-</section>
-
+    <!-- Sección superior: Nueva Idea -->
+    <section style="text-align: center; margin-top: 2rem;">
+      <h2 style="display: flex; justify-content: center; align-items: center; gap: 0.5rem;">
+        <span style="font-size: 1.5rem;">💡</span>
+        <span style="font-weight: bold;">Nueva Idea</span>
+      </h2>
+      <div style="display: flex; justify-content: center; margin-top: 1rem;">
+        <input type="text" id="idea-input" placeholder="Escribe tu nueva idea aquí..." style="width: 60%; padding: 0.5rem; font-style: italic; border: 1px solid black;" />
+        <button id="idea-btn" style="padding: 0.5rem 1rem; background: white; border: 1px solid black; cursor: pointer;">➤</button>
+      </div>
+    </section>
   </main>
 
   <script>
@@ -43,6 +42,16 @@
           document.getElementById("menu-placeholder").innerHTML = data;
         })
         .catch(error => console.error("No se pudo cargar el menú:", error));
+
+      // Redirigir al hacer clic en la flecha
+      document.getElementById("idea-btn").addEventListener("click", function () {
+        // (opcional) podrías guardar la idea en localStorage aquí si quisieras
+        const idea = document.getElementById("idea-input").value.trim();
+        if (idea) {
+          localStorage.setItem("ideaTemporal", idea); // opcional, puedes usarla luego
+        }
+        window.location.href = "ideacion.html"; // redirección
+      });
     });
   </script>
 
