@@ -1,13 +1,17 @@
-<textarea
-  id="idea-textarea"
-  placeholder="Toda gran idea comienza con una locura que alguien se atrevió a tomar en serio."
-  style="width: 100%; height: 100%; resize: none; font-size: 1rem; font-family: sans-serif; padding: 0.5rem; box-sizing: border-box;">
+<textarea id="idea-textarea" style="width: 100%; height: 100%; resize: none; font-size: 1rem; font-family: sans-serif; padding: 0.5rem; box-sizing: border-box;">
+Toda gran idea comienza con una locura que alguien se atrevió a tomar en serio.
 </textarea>
 
 <script>
   const textarea = document.getElementById('idea-textarea');
-  textarea.value = localStorage.getItem('ideaTexto') || '';
 
+  // Cargar texto guardado (si existe)
+  const guardado = localStorage.getItem('ideaTexto');
+  if (guardado !== null) {
+    textarea.value = guardado;
+  }
+
+  // Guardar cada vez que el usuario escriba
   textarea.addEventListener('input', () => {
     localStorage.setItem('ideaTexto', textarea.value);
   });
