@@ -13,6 +13,7 @@
     padding: 1rem;
     border-bottom: 1px solid #000;
     overflow-y: auto;
+    font-family: sans-serif;
   }
 
   .idea-footer {
@@ -59,8 +60,8 @@
 </style>
 
 <div class="idea-wrapper">
-  <div class="idea-content" id="ideaCentralTexto">
-    <!-- Aquí se cargará el contenido externo -->
+  <div class="idea-content" id="ideaDisplay">
+    <!-- Aquí se mostrarán las ideas -->
   </div>
 
   <div class="idea-footer">
@@ -72,17 +73,33 @@
       <div class="tab">Idea 2 <span class="close">✖</span></div>
     </div>
     <div class="idea-input">
-      <input type="text" placeholder="Escribir aquí..." />
-      <button>➤</button>
+      <input id="ideaInput" type="text" placeholder="Escribir aquí..." />
+      <button onclick="enviarIdea()">➤</button>
     </div>
   </div>
 </div>
 
 <script>
-  // Cargar el contenido HTML del texto central
-  fetch("ideacion-nueva-idea-texto-central.html")
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById("ideaCentralTexto").innerHTML = html;
-    });
+  const input = document.getElementById("ideaInput");
+  const display = document.getElementById("ideaDisplay");
+
+  // Mostrar ideas guardadas previamente
+  const ideas = JSON.parse(localStorage.getItem("ideas")) || [];
+  ideas.forEach(text => agregarIdea(text));
+
+  function enviarIdea() {
+    const texto = input.value.trim();
+    if (texto !== "") {
+      agregarIdea(texto);
+      ideas.push(texto);
+      localStorage.setItem("ideas", JSON.stringify(ideas));
+      input.value = "";
+    }
+  }
+
+  function agregarIdea(texto) {
+    const p = document.createElement("p");
+    p.textContent = texto;
+    display.appendChild(p);
+  }
 </script>
