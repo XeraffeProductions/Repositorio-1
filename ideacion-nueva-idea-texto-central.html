@@ -1,72 +1,72 @@
-<!-- ideacion-nueva-idea-texto-central.html -->
+<textarea id="idea-textarea" style="width: 100%; height: 100%; resize: none; font-size: 1rem; font-family: sans-serif; padding: 0.5rem; box-sizing: border-box;">
+Usuario: Hola
 
-<div contenteditable="true" id="editableArea"
-     style="width: 100%; height: 100%; padding: 0.5rem; box-sizing: border-box; font-size: 1rem; font-family: sans-serif; overflow-y: auto;">
-</div>
+Xera:
+¡Hola! ¡Qué bueno que estés aquí! Soy tu asistente virtual especializado en ayudarte a crear reels impactantes para tu negocio o podcast, listos para que nos los envíes a editar.
+Mi objetivo es que tú te enfoques en lo tuyo, pienses lo mínimo en la creación de contenido y, aun así, tengas un flujo constante de reels de alta calidad que te ayuden a crecer.
+Para empezar y poder darte la mejor estrategia personalizada, necesito conocerte un poco mejor. Cuéntame:
+
+¿Tienes un negocio o un podcast?
+
+¿Cuál es tu nicho o tema principal?
+
+Usuario: Tengo una frutería
+
+Xera:
+¡Excelente! Una frutería tiene un potencial visual ENORME para reels. ¡Piensa en todos esos colores, texturas y la frescura que puedes transmitir!
+
+Tu estrategia principal debe girar en torno a:
+
+El Atractivo Visual: Frutas y verduras son naturalmente fotogénicas.
+
+La Frescura y Calidad: Mostrar lo mejor de tus productos.
+
+Utilidad y Consejos: Cómo elegir, conservar, preparar.
+
+Conexión Local: Si es relevante, destacar que eres el negocio del barrio.
+
+Aquí tienes ideas concretas para que empieces a grabar YA MISMO (recuerda, graba varias tomas de cada idea, diferentes ángulos, ¡más es mejor para la edición!):
+
+Ideas de Reels para tu Frutería (¡Graba varias escenas de cada una!):
+
+"La Llegada de lo Fresco"
+Escenas a grabar:
+
+Tú (o un empleado) descargando cajas de fruta/verdura nueva.
+
+Primeros planos de las frutas más vistosas recién salidas de la caja (ej. fresas brillantes, mangos coloridos).
+
+Manos colocando cuidadosamente la fruta en los exhibidores.
+
+Un paneo general del exhibidor lleno y atractivo.
+
+Audio sugerido: Música alegre, enérgica. Puedes añadir un texto tipo: "¡Recién llegado! La frescura que mereces."
+
+"Elige la Fruta Perfecta como un Experto"
+Escenas a grabar:
+
+Tú sosteniendo dos piezas de la misma fruta (una buena, una no tanto, si es sutil la diferencia).
+
+Primer plano de tus manos mostrando cómo olerla, tocarla (suavemente), o qué color buscar. (Ej. "Para un aguacate perfecto, busca que ceda un poco al tacto, así").
+
+Graba esto con 2-3 frutas diferentes (un reel por fruta o un compilado).
+
+Audio sugerido: Tu voz explicando el tip, o música de fondo y texto superpuesto con el consejo.
+
+¡Dime con cuál te gustaría partir para darte más detalles y ayudarte en cada paso que necesites! Podemos discutir todas las ideas que tengas en mente :)
+</textarea>
 
 <script>
-  const editableArea = document.getElementById("editableArea");
+  const textarea = document.getElementById('idea-textarea');
 
-  // Cargar contenido HTML guardado
-  const contenidoGuardado = localStorage.getItem("ideaTexto");
-  if (contenidoGuardado) {
-    editableArea.innerHTML = contenidoGuardado;
-  } else {
-    editableArea.innerHTML = `
-      <p><strong>Usuario:</strong> Hola</p>
-
-<p><strong>Xera:</strong></p>
-<p>¡Hola! ¡Qué bueno que estés aquí! Soy tu asistente virtual especializado en ayudarte a crear reels impactantes para tu negocio o podcast, listos para que nos los envíes a editar.</p>
-<p>Mi objetivo es que tú te enfoques en lo tuyo, pienses lo mínimo en la creación de contenido y, aun así, tengas un flujo constante de reels de alta calidad que te ayuden a crecer.</p>
-<p>Para empezar y poder darte la mejor estrategia personalizada, necesito conocerte un poco mejor. Cuéntame:</p>
-<ul>
-  <li>¿Tienes un negocio o un podcast?</li>
-  <li>¿Cuál es tu nicho o tema principal?</li>
-</ul>
-
-<p><strong>Usuario:</strong> Tengo una frutería</p>
-
-<p><strong>Xera:</strong></p>
-<p>¡Excelente! Una frutería tiene un potencial visual ENORME para reels. ¡Piensa en todos esos colores, texturas y la frescura que puedes transmitir!</p>
-
-<p><strong>Tu estrategia principal debe girar en torno a:</strong></p>
-<ul>
-  <li><strong>El Atractivo Visual:</strong> Frutas y verduras son naturalmente fotogénicas.</li>
-  <li><strong>La Frescura y Calidad:</strong> Mostrar lo mejor de tus productos.</li>
-  <li><strong>Utilidad y Consejos:</strong> Cómo elegir, conservar, preparar.</li>
-  <li><strong>Conexión Local:</strong> Si es relevante, destacar que eres el negocio del barrio.</li>
-</ul>
-
-<p>Aquí tienes ideas concretas para que empieces a grabar YA MISMO (recuerda, graba varias tomas de cada idea, diferentes ángulos, ¡más es mejor para la edición!):</p>
-
-<p><strong>Ideas de Reels para tu Frutería (¡Graba varias escenas de cada una!):</strong></p>
-
-<p><strong>"La Llegada de lo Fresco":</strong></p>
-<p><strong>Escenas a grabar:</strong></p>
-<ul>
-  <li>Tú (o un empleado) descargando cajas de fruta/verdura nueva.</li>
-  <li>Primeros planos de las frutas más vistosas recién salidas de la caja (ej. fresas brillantes, mangos coloridos).</li>
-  <li>Manos colocando cuidadosamente la fruta en los exhibidores.</li>
-  <li>Un paneo general del exhibidor lleno y atractivo.</li>
-</ul>
-
-<p><strong>Audio sugerido:</strong> Música alegre, enérgica. Puedes añadir un texto tipo: "¡Recién llegado! La frescura que mereces."</p>
-
-<p><strong>"Elige la Fruta Perfecta como un Experto":</strong></p>
-<p><strong>Escenas a grabar:</strong></p>
-<ul>
-  <li>Tú sosteniendo dos piezas de la misma fruta (una buena, una no tanto, si es sutil la diferencia).</li>
-  <li>Primer plano de tus manos mostrando cómo olerla, tocarla (suavemente), o qué color buscar. (Ej. "Para un aguacate perfecto, busca que ceda un poco al tacto, así").</li>
-  <li>Graba esto con 2-3 frutas diferentes (un reel por fruta o un compilado).</li>
-</ul>
-
-<p><strong>Audio sugerido:</strong> Tu voz explicando el tip, o música de fondo y texto superpuesto con el consejo.</p>
-<p>¡Dime con cuál te gustaría partir para darte más detalles y ayudarte en cada paso que necesites! Podemos discutir todas las ideas que tengas en mente :)</p>
-    `;
+  // Cargar texto guardado (si existe)
+  const guardado = localStorage.getItem('ideaTexto');
+  if (guardado !== null) {
+    textarea.value = guardado;
   }
 
-  // Guardar contenido HTML al escribir
-  editableArea.addEventListener("input", () => {
-    localStorage.setItem("ideaTexto", editableArea.innerHTML);
+  // Guardar cada vez que el usuario escriba
+  textarea.addEventListener('input', () => {
+    localStorage.setItem('ideaTexto', textarea.value);
   });
 </script>

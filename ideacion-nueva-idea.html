@@ -67,11 +67,7 @@
 </style>
 
 <div class="idea-wrapper">
-  <div class="idea-content" id="ideaDisplay">
-    <!-- El contenido HTML guardado se cargará aquí -->
-  </div>
-
-
+  <div class="idea-content" id="ideaDisplay"></div>
 
   <div class="idea-footer">
     <div class="idea-tabs">
@@ -93,19 +89,19 @@
     const savedIdeas = JSON.parse(localStorage.getItem("ideasGuardadas")) || [];
     const display = document.getElementById("ideaDisplay");
     display.innerHTML = "";
-    savedIdeas.forEach(html => {
+    savedIdeas.forEach(text => {
       const div = document.createElement("div");
       div.className = "idea-entry";
-      div.innerHTML = html; // ← usar innerHTML para mantener formato
+      div.textContent = text;
       display.appendChild(div);
     });
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    // Cargar ideas guardadas desde localStorage
+    // Cargar ideas previas
     cargarIdeas();
 
-    // Cargar contenido externo (HTML con formato)
+    // Cargar contenido externo del archivo central si existe
     fetch("ideacion-nueva-idea-texto-central.html")
       .then(res => res.text())
       .then(html => {
@@ -122,10 +118,10 @@
       const text = input.value.trim();
       if (text) {
         const savedIdeas = JSON.parse(localStorage.getItem("ideasGuardadas")) || [];
-        savedIdeas.push(text); // ← acepta HTML, no se escapa
+        savedIdeas.push(text);
         localStorage.setItem("ideasGuardadas", JSON.stringify(savedIdeas));
         input.value = "";
-        cargarIdeas(); // ← se vuelve a mostrar todo
+        cargarIdeas();
       }
     });
   });
