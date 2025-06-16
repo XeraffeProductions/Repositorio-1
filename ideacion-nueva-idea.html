@@ -13,7 +13,6 @@
     padding: 1rem;
     border-bottom: 1px solid #000;
     overflow-y: auto;
-    font-family: sans-serif;
   }
 
   .idea-footer {
@@ -57,6 +56,14 @@
     padding: 0.3rem 0.8rem;
     cursor: pointer;
   }
+
+  .idea-entry {
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    white-space: pre-wrap;
+  }
 </style>
 
 <div class="idea-wrapper">
@@ -73,33 +80,39 @@
       <div class="tab">Idea 2 <span class="close">✖</span></div>
     </div>
     <div class="idea-input">
-      <input id="ideaInput" type="text" placeholder="Escribir aquí..." />
-      <button onclick="enviarIdea()">➤</button>
+      <input type="text" placeholder="Escribir aquí..." id="ideaInput" />
+      <button id="sendBtn">➤</button>
     </div>
   </div>
 </div>
 
 <script>
   const input = document.getElementById("ideaInput");
+  const sendBtn = document.getElementById("sendBtn");
   const display = document.getElementById("ideaDisplay");
 
-  // Mostrar ideas guardadas previamente
-  const ideas = JSON.parse(localStorage.getItem("ideas")) || [];
-  ideas.forEach(text => agregarIdea(text));
+  // Cargar ideas guardadas
+  const savedIdeas = JSON.parse(localStorage.getItem("ideasGuardadas")) || [];
+  savedIdeas.forEach(text => {
+    const p = document.createElement("div");
+    p.className = "idea-entry";
+    p.textContent = text;
+    display.appendChild(p);
+  });
 
-  function enviarIdea() {
-    const texto = input.value.trim();
-    if (texto !== "") {
-      agregarIdea(texto);
-      ideas.push(texto);
-      localStorage.setItem("ideas", JSON.stringify(ideas));
+  // Guardar nueva idea
+  sendBtn.addEventListener("click", () => {
+    const text = input.value.trim();
+    if (text) {
+      const p = document.createElement("div");
+      p.className = "idea-entry";
+      p.textContent = text;
+      display.appendChild(p);
+
+      savedIdeas.push(text);
+      localStorage.setItem("ideasGuardadas", JSON.stringify(savedIdeas));
+
       input.value = "";
     }
-  }
-
-  function agregarIdea(texto) {
-    const p = document.createElement("p");
-    p.textContent = texto;
-    display.appendChild(p);
-  }
+  });
 </script>
