@@ -3,7 +3,7 @@
     border: 1px solid #000;
     display: flex;
     flex-direction: column;
-    height: 550px; /* Aumentado desde 300px */
+    height: 550px;
     justify-content: space-between;
     background-color: white;
   }
@@ -11,7 +11,8 @@
   .idea-content {
     flex: 1;
     padding: 1rem;
-    border-bottom: 1px solid #000; /* Línea divisoria */
+    border-bottom: 1px solid #000;
+    overflow-y: auto;
   }
 
   .idea-footer {
@@ -58,9 +59,10 @@
 </style>
 
 <div class="idea-wrapper">
-  <div class="idea-content">
-    <!-- Aquí irán las ideas escritas -->
+  <div class="idea-content" id="ideaCentralTexto">
+    <!-- Aquí se cargará el contenido externo -->
   </div>
+
   <div class="idea-footer">
     <div class="idea-tabs">
       <div class="tab">Nueva idea <span class="close">✖</span></div>
@@ -75,3 +77,12 @@
     </div>
   </div>
 </div>
+
+<script>
+  // Cargar el contenido HTML del texto central
+  fetch("ideacion-nueva-idea-texto-central.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("ideaCentralTexto").innerHTML = html;
+    });
+</script>
