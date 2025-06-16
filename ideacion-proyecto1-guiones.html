@@ -3,5 +3,33 @@
 <!-- Reemplazo total de la parte central por input de imagen -->
 <div style="height: 600px; border: 1px solid black; margin-top: 8px; padding: 8px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
   <label style="font-style: italic; margin-bottom: 8px;">Sube una imagen del guion</label>
-  <input type="file" accept="image/*" style="font-style: italic;" />
+  <input id="imagenGuionInput" type="file" accept="image/*" style="font-style: italic; margin-bottom: 12px;" />
+  <img id="imagenGuionVista" src="" alt="Vista previa" style="max-height: 400px; display: none; border: 1px solid #ccc; padding: 4px;" />
 </div>
+
+<script>
+  const input = document.getElementById('imagenGuionInput');
+  const img = document.getElementById('imagenGuionVista');
+
+  // Cargar imagen desde localStorage al iniciar
+  const imgBase64 = localStorage.getItem('imagenGuion');
+  if (imgBase64) {
+    img.src = imgBase64;
+    img.style.display = 'block';
+  }
+
+  // Mostrar imagen al seleccionar
+  input.addEventListener('change', function (e) {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        const base64 = event.target.result;
+        localStorage.setItem('imagenGuion', base64);
+        img.src = base64;
+        img.style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+</script>
