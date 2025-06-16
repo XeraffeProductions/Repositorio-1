@@ -1,10 +1,8 @@
-<div style="border: 1px solid black; padding: 8px; font-style: italic; font-family: sans-serif;">Objetivo(s) opcional</div>
-
-<!-- Reemplazo total de la parte central por input de imagen -->
-<div style="height: 600px; border: 1px solid black; margin-top: 8px; padding: 8px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-  <label style="font-style: italic; margin-bottom: 8px;">Sube una imagen del guion</label>
+<!-- Reemplazo total de la parte central por input de imagen sin bordes ni restricciones de tamaño -->
+<div style="padding: 8px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+  <label style="font-style: italic; margin-bottom: 8px; font-family: sans-serif;">Sube una imagen del guion</label>
   <input id="imagenGuionInput" type="file" accept="image/*" style="font-style: italic; margin-bottom: 12px;" />
-  <img id="imagenGuionVista" src="" alt="Vista previa" style="max-height: 400px; display: none; border: 1px solid #ccc; padding: 4px;" />
+  <img id="imagenGuionVista" src="" alt="Vista previa" style="max-width: 100%; display: none; border: 1px solid #ccc; padding: 4px;" />
 </div>
 
 <script>
