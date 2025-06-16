@@ -67,7 +67,10 @@
 </style>
 
 <div class="idea-wrapper">
-  <div class="idea-content" id="ideaDisplay"></div>
+  <div class="idea-content" id="ideaDisplay">
+    <!-- El contenido HTML guardado se cargará aquí -->
+  </div>
+
 
   <div class="idea-footer">
     <div class="idea-tabs">
@@ -85,44 +88,17 @@
 </div>
 
 <script>
-  function cargarIdeas() {
-    const savedIdeas = JSON.parse(localStorage.getItem("ideasGuardadas")) || [];
-    const display = document.getElementById("ideaDisplay");
-    display.innerHTML = "";
-    savedIdeas.forEach(text => {
-      const div = document.createElement("div");
-      div.className = "idea-entry";
-      div.textContent = text;
-      display.appendChild(div);
-    });
-  }
-
   document.addEventListener("DOMContentLoaded", () => {
-    // Cargar ideas previas
-    cargarIdeas();
-
-    // Cargar contenido externo del archivo central si existe
+    // Cargar contenido externo del archivo central
     fetch("ideacion-nueva-idea-texto-central.html")
       .then(res => res.text())
       .then(html => {
         const container = document.getElementById("ideaDisplay");
-        const wrapper = document.createElement("div");
-        wrapper.innerHTML = html;
-        container.appendChild(wrapper);
-      });
-
-    const input = document.getElementById("ideaInput");
-    const sendBtn = document.getElementById("sendBtn");
-
-    sendBtn.addEventListener("click", () => {
-      const text = input.value.trim();
-      if (text) {
-        const savedIdeas = JSON.parse(localStorage.getItem("ideasGuardadas")) || [];
-        savedIdeas.push(text);
-        localStorage.setItem("ideasGuardadas", JSON.stringify(savedIdeas));
-        input.value = "";
-        cargarIdeas();
-      }
-    });
+        if (container) {
+          container.innerHTML = html;
+        }
+      })
+      .catch(error => console.error("Error al cargar el contenido:", error));
   });
 </script>
+
