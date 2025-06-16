@@ -1,37 +1,13 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <style>
-    textarea {
-      width: 100%;
-      height: 100%;
-      border: none;
-      outline: none;
-      font-family: sans-serif;
-      font-size: 1rem;
-      resize: none;
-    }
-  </style>
-</head>
-<body>
-  <textarea id="idea-textarea"></textarea>
+<textarea id="ideaTextArea" placeholder="Escribe aquí tu idea..." style="width: 100%; height: 100%; border: none; font-style: italic; font-size: 1rem;"></textarea>
 
-  <script>
-    const textarea = document.getElementById('idea-textarea');
+<script>
+  const textarea = document.getElementById('ideaTextArea');
 
-    // Texto por defecto si no hay nada en localStorage
-    const textoInicial = `Aquí puedes escribir tus ideas creativas.
-Este es un ejemplo de texto inicial con saltos de línea.
-Puedes modificarlo como desees y se guardará automáticamente.`;
+  // Cargar texto desde LocalStorage al iniciar
+  textarea.value = localStorage.getItem('ideaTextoCentral') || '';
 
-    // Mostrar texto desde localStorage o usar el texto por defecto
-    textarea.value = localStorage.getItem('ideaTextoCentral') || textoInicial;
-
-    // Guardar cambios automáticamente al escribir
-    textarea.addEventListener('input', () => {
-      localStorage.setItem('ideaTextoCentral', textarea.value);
-    });
-  </script>
-</body>
-</html>
+  // Guardar en LocalStorage al escribir
+  textarea.addEventListener('input', () => {
+    localStorage.setItem('ideaTextoCentral', textarea.value);
+  });
+</script>
