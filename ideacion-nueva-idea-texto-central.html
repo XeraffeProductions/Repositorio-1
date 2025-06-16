@@ -1,13 +1,13 @@
-<textarea id="ideaTextArea" placeholder="Escribe aquí tu idea..." style="width: 100%; height: 100%; border: none; font-style: italic; font-size: 1rem;"></textarea>
+<textarea id="idea-textarea" placeholder="Escribe tu idea..." style="width: 100%; height: 100%; resize: none;"></textarea>
 
 <script>
-  const textarea = document.getElementById('ideaTextArea');
+  const textarea = document.getElementById('idea-textarea');
 
-  // Cargar texto desde LocalStorage al iniciar
-  textarea.value = localStorage.getItem('ideaTextoCentral') || '';
+  // Cargar texto guardado
+  textarea.value = localStorage.getItem('ideaTexto') || '';
 
-  // Guardar en LocalStorage al escribir
+  // Guardar automáticamente en cada cambio
   textarea.addEventListener('input', () => {
-    localStorage.setItem('ideaTextoCentral', textarea.value);
+    localStorage.setItem('ideaTexto', textarea.value);
   });
 </script>
