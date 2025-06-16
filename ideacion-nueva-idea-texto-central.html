@@ -1,5 +1,19 @@
-<textarea id="idea-textarea" style="width: 100%; height: 100%; resize: none; font-size: 1rem; font-family: sans-serif; padding: 0.5rem; box-sizing: border-box;">
-<p><strong>Usuario:</strong> Hola</p>
+<!-- ideacion-nueva-idea-texto-central.html -->
+
+<div contenteditable="true" id="editableArea"
+     style="width: 100%; height: 100%; padding: 0.5rem; box-sizing: border-box; font-size: 1rem; font-family: sans-serif; overflow-y: auto;">
+</div>
+
+<script>
+  const editableArea = document.getElementById("editableArea");
+
+  // Cargar contenido HTML guardado
+  const contenidoGuardado = localStorage.getItem("ideaTexto");
+  if (contenidoGuardado) {
+    editableArea.innerHTML = contenidoGuardado;
+  } else {
+    editableArea.innerHTML = `
+      <p><strong>Usuario:</strong> Hola</p>
 
 <p><strong>Xera:</strong></p>
 <p>¡Hola! ¡Qué bueno que estés aquí! Soy tu asistente virtual especializado en ayudarte a crear reels impactantes para tu negocio o podcast, listos para que nos los envíes a editar.</p>
@@ -48,17 +62,11 @@
 
 <p><strong>Audio sugerido:</strong> Tu voz explicando el tip, o música de fondo y texto superpuesto con el consejo.</p>
 <p>¡Dime con cuál te gustaría partir para darte más detalles y ayudarte en cada paso que necesites! Podemos discutir todas las ideas que tengas en mente :)</p>
-
-</textarea>
-
-<script>
-  const textarea = document.getElementById('idea-textarea');
-  const saved = localStorage.getItem('ideaTexto');
-  if (saved !== null) {
-    textarea.value = saved;
+    `;
   }
 
-  textarea.addEventListener('input', () => {
-    localStorage.setItem('ideaTexto', textarea.value);
+  // Guardar contenido HTML al escribir
+  editableArea.addEventListener("input", () => {
+    localStorage.setItem("ideaTexto", editableArea.innerHTML);
   });
 </script>
