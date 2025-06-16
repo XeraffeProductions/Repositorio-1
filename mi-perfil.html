@@ -73,6 +73,39 @@
   border-radius: 4px;
 }
 
+  .upload-wrapper {
+    margin-top: 1rem;
+  }
+
+  .grid-preview {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 por fila */
+    gap: 10px;
+    margin-top: 1rem;
+  }
+
+  .grid-preview img {
+    width: 100%;
+    height: auto;
+    max-width: 200px;
+    border: 5px solid transparent;
+    box-sizing: border-box;
+  }
+
+  .grid-preview img.border-orange {
+    border-color: rgba(255, 165, 0, 0.5);
+  }
+
+  .grid-preview img.border-yellow {
+    border-color: rgba(255, 255, 0, 0.5);
+  }
+
+  .grid-preview img.border-green {
+    border-color: rgba(0, 128, 0, 0.5);
+  }
+</style>
+
+
   </style>
 </head>
 <body>
@@ -98,71 +131,74 @@
   <!-- Aquí agregaremos el feed más adelante -->
 </section>
 
-<div class="profile-feed">
-  <input type="file" accept="image/*" id="imageUploader" />
-  <div class="image-grid" id="imageGrid"></div>
+<div class="upload-wrapper">
+  <input type="file" id="imageInput" multiple />
+  <div class="grid-preview" id="imageGrid"></div>
 </div>
+
 
 
 </main>
 
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    fetch("menu.html")
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById("menu-placeholder").innerHTML = data;
-      })
-      .catch(error => console.error("No se pudo cargar el menú:", error));
-  });
+  const imageInput = document.getElementById("imageInput");
+  const imageGrid = document.getElementById("imageGrid");
 
-  function compressImage(file, callback) {
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const img = new Image();
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        canvas.width = 400;
-        canvas.height = 400;
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(img, 0, 0, 400, 400);
-        const compressed = canvas.toDataURL('image/jpeg', 0.6);
-        callback(compressed);
-      };
-      img.src = event.target.result;
-    };
-    reader.readAsDataURL(file);
+  function saveToLocalStorage(images) {
+    localStorage.setItem("perfilFeed", JSON.stringify(images));
   }
 
   function loadImages() {
-    const container = document.getElementById('imageGrid');
-    container.innerHTML = '';
-    const stored = JSON.parse(localStorage.getItem('perfilFeed')) || [];
-    stored.forEach((src, index) => {
-      const img = document.createElement('img');
+    const images = JSON.parse(localStorage.getItem("perfilFeed")) || [];
+    imageGrid.innerHTML = "";
+    images.slice(0, 6).forEach((src, idx) => {
+      const img = document.createElement("img");
       img.src = src;
-      img.style.borderColor =
-        index === 0 ? 'rgba(255,165,0,0.5)' : index === 1 ? 'rgba(255,255,0,0.5)' : 'rgba(0,255,0,0.5)';
-      container.appendChild(img);
+      if (idx === 0) img.classList.add("border-orange");
+      else if (idx === 1) img.classList.add("border-yellow");
+      else img.classList.add("border-green");
+      imageGrid.appendChild(img);
     });
   }
 
-  document.getElementById('imageUploader').addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
+  function compressAndStore(files) {
+    const images = JSON.parse(localStorage.getItem("perfilFeed")) || [];
+    const limit = 6 - images.length;
+    const filesToProcess = [...files].slice(0, limit);
+    const promises = filesToProcess.map(file => new Promise(resolve => {
+      const reader = new FileReader();
+      reader.onload = e => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          const maxW = 400;
+          const scale = maxW / img.width;
+          canvas.width = maxW;
+          canvas.height = img.height * scale;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          resolve(canvas.toDataURL("image/jpeg", 0.6)); // compresión
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }));
 
-    compressImage(file, (compressedDataUrl) => {
-      const stored = JSON.parse(localStorage.getItem('perfilFeed')) || [];
-      stored.push(compressedDataUrl);
-      localStorage.setItem('perfilFeed', JSON.stringify(stored));
+    Promise.all(promises).then(newImages => {
+      const updated = [...images, ...newImages].slice(0, 6);
+      saveToLocalStorage(updated);
       loadImages();
     });
+  }
+
+  imageInput.addEventListener("change", (e) => {
+    compressAndStore(e.target.files);
   });
 
-  document.addEventListener('DOMContentLoaded', loadImages);
-
+  document.addEventListener("DOMContentLoaded", loadImages);
 </script>
+
 
 
 </body>
