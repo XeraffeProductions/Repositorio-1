@@ -75,8 +75,17 @@
     <h2 style="margin: 0;">Nombre</h2>
   </div>
 
-  <!-- Aquí agregaremos el feed más adelante -->
+  <!-- Imagen subida -->
+  <div style="margin-bottom: 1rem;">
+    <input type="file" id="profileImageInput" />
+  </div>
+
+  <!-- Imagen desplegada -->
+  <div>
+    <img id="profileImage" style="max-width: 100%; height: auto; border-radius: 10px; border: 2px solid #ccc;" />
+  </div>
 </section>
+
 
 </main>
 
@@ -92,6 +101,48 @@
   });
 </script>
 
+<script>
+  const input = document.getElementById("profileImageInput");
+  const imgDisplay = document.getElementById("profileImage");
+
+  function loadProfileImage() {
+    const saved = localStorage.getItem("perfilImagen");
+    if (saved) {
+      imgDisplay.src = saved;
+    }
+  }
+
+  function compressImage(file, callback) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const img = new Image();
+      img.onload = function () {
+        const canvas = document.createElement("canvas");
+        const maxW = 800;
+        const scale = maxW / img.width;
+        canvas.width = maxW;
+        canvas.height = img.height * scale;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        const compressed = canvas.toDataURL("image/jpeg", 0.7);
+        callback(compressed);
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  input.addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    compressImage(file, (compressedDataUrl) => {
+      localStorage.setItem("perfilImagen", compressedDataUrl);
+      imgDisplay.src = compressedDataUrl;
+    });
+  });
+
+  document.addEventListener("DOMContentLoaded", loadProfileImage);
+</script>
 
 </body>
 </html>
