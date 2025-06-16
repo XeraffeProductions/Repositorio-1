@@ -1,0 +1,72 @@
+<!-- ideacion-proyecto1-chat.html -->
+<style>
+  .chat-wrapper {
+    border: 1px solid #000;
+    display: flex;
+    flex-direction: column;
+    height: 550px;
+    justify-content: flex-end;
+    background-color: white;
+  }
+
+  .chat-content {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    border-bottom: 1px solid #000;
+  }
+
+  .chat-input {
+    display: flex;
+    gap: 0.3rem;
+    padding: 0.5rem;
+  }
+
+  .chat-input input {
+    flex: 1;
+    padding: 0.3rem;
+    font-style: italic;
+  }
+
+  .chat-input button {
+    padding: 0.3rem 0.8rem;
+    cursor: pointer;
+  }
+</style>
+
+<div class="chat-wrapper">
+  <div class="chat-content" id="chatContent"></div>
+
+  <div class="chat-input">
+    <input type="text" id="chatInput" placeholder="Escribir aquí..." />
+    <button onclick="enviarMensaje()">➤</button>
+  </div>
+</div>
+
+<script>
+  function cargarMensajes() {
+    const mensajes = JSON.parse(localStorage.getItem("chatProyecto1")) || [];
+    const contenedor = document.getElementById("chatContent");
+    contenedor.innerHTML = "";
+    mensajes.forEach(m => {
+      const div = document.createElement("div");
+      div.textContent = m;
+      contenedor.appendChild(div);
+    });
+  }
+
+  function enviarMensaje() {
+    const input = document.getElementById("chatInput");
+    const texto = input.value.trim();
+    if (!texto) return;
+
+    const mensajes = JSON.parse(localStorage.getItem("chatProyecto1")) || [];
+    mensajes.push(texto);
+    localStorage.setItem("chatProyecto1", JSON.stringify(mensajes));
+
+    input.value = "";
+    cargarMensajes();
+  }
+
+  document.addEventListener("DOMContentLoaded", cargarMensajes);
+</script>
