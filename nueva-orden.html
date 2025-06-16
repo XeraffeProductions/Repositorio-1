@@ -165,6 +165,17 @@ window.addEventListener("hashchange", handleHashChange);
         if (saved) document.getElementById(id).src = saved;
       });
     });
+  
+  // Mostrar sección por defecto según el hash (ej: #cortas)
+  document.addEventListener("DOMContentLoaded", () => {
+    const hash = window.location.hash;
+    if (hash === "#cortas") {
+      const boton = document.querySelector('button[onclick*="c1"]');
+      if (boton) boton.click();
+    }
+  });
+</script>
+
   </script>
 
 </body>
